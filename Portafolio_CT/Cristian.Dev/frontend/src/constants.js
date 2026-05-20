@@ -294,5 +294,5 @@ export const PROFILE = {
   location: 'Bogotá, D.C., Colombia',
   github: 'https://github.com/cristianT2002',
   linkedin: 'https://linkedin.com/in/cristiantasconm',
-  bio: 'Ingeniero electrónico con 3+ años construyendo backends que escalan: visión por computadora, arquitecturas distribuidas y plataformas full-stack con impacto medible.',
+  bio: 'Software Engineer con 3+ años construyendo soluciones Full Stack, especializado en Backend ',
 };

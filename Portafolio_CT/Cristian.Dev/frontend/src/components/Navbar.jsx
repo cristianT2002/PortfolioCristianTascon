@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { NAV_LINKS } from '../constants';
 import { Terminal } from 'lucide-react';
+import logo from '../assets/CLogo.png';
 
 export default function Navbar() {
   return (
@@ -11,14 +12,9 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between glass px-6 py-3 rounded-full">
         <div className="flex items-center gap-2">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20"
-          >
-            <Terminal className="w-5 h-5 text-white" />
-          </motion.div>
+          <img src={logo} alt="logo" className="w-8 h-8" />
           <span className="font-bold text-lg tracking-tight hidden sm:block">
-            Cristian<span className="text-blue-400">.Dev</span>
+            Cristian<span className="text-blue-400">.Software</span>
           </span>
         </div>
 

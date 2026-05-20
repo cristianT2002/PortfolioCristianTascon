@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { PROJECTS, PROFILE } from '../constants';
-import profileImg from '../assets/profile.png';
+import profileImg from '../assets/FotoPerfil.png';
 import {
   BadgeCheck,
   Bookmark,
@@ -391,11 +391,7 @@ export default function ProjectGrid() {
             <Layers className="w-3.5 h-3.5" />
             Feed de proyectos
           </div>
-          <h2 className="text-4xl font-bold mb-4">Publicaciones con impacto real</h2>
-          <p className="text-gray-400 max-w-xl">
-            Cada proyecto como un post de Instagram: desliza las capturas, contexto, stack y
-            clientes en los comentarios.
-          </p>
+          <h2 className="text-4xl font-bold mb-4">Proyectos realizados</h2>
         </motion.div>
         <motion.a
           href={PROFILE.github}
