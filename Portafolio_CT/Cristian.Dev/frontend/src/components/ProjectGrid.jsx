@@ -253,8 +253,18 @@ function InstagramPost({ project }) {
 
             <div className="rounded-2xl bg-white/[0.03] border border-white/8 p-4 space-y-3">
               <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                Especificaciones técnicas
+                Mi rol en el proyecto
               </p>
+              <div className="flex flex-wrap gap-1.5">
+                {techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/25 text-[11px] font-medium text-blue-200"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
               <div className="flex flex-wrap gap-1.5">
                 {techStack.map((tech) => (
                   <span
