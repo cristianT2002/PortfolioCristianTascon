@@ -18,12 +18,11 @@ export default function Experience() {
       >
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
           <Briefcase className="w-3.5 h-3.5" />
-          Trayectoria
+          Experiencia
         </div>
-        <h2 className="text-4xl font-bold mb-4">Dónde he construido impacto</h2>
+        <h2 className="text-4xl font-bold mb-4">¿Dónde he construido impacto?</h2>
         <p className="text-gray-400 max-w-xl">
-          Resumen por empresa. Los proyectos de arriba son la evidencia — aquí ves cómo encajan en
-          mi carrera.
+          En mi desarrollo como profesional, me he involucrado en proyectos muy interesantes.
         </p>
       </motion.div>
 

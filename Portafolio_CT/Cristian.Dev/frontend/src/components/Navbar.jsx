@@ -14,7 +14,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <img src={logo} alt="logo" className="w-8 h-8" />
           <span className="font-bold text-lg tracking-tight hidden sm:block">
-            Cristian<span className="text-blue-400">.Software</span>
+            Cristian<span className="text-blue-400">.Tascón</span>
           </span>
         </div>
 
@@ -37,7 +37,7 @@ export default function Navbar() {
             href="#contact"
             className="bg-white text-black px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-500 hover:text-white transition-all duration-300 inline-block"
           >
-            Charlemos
+            Contáctame
           </a>
         </motion.div>
       </nav>

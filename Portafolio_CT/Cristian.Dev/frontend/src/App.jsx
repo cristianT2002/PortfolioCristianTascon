@@ -11,8 +11,8 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <ProjectGrid />
         <Experience />
+        <ProjectGrid />
         <SkillShowcase />
         <Contact />
       </main>

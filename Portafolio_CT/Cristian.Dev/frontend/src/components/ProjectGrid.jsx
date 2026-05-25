@@ -33,7 +33,7 @@ function ClientAvatar({ client, size = 'md' }) {
       <img
         src={client.logo}
         alt={client.name}
-        className={`${sizeClass} rounded-full object-cover border border-white/10 shrink-0`}
+        className={`${sizeClass} rounded-2xl object-contain bg-white p-0.5 border border-white/10 shrink-0`}
       />
     );
   }
@@ -241,13 +241,10 @@ function InstagramPost({ project }) {
 
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 scrollbar-hide">
             <div className="text-sm leading-relaxed">
-              <p>
-                <span className="font-semibold mr-1.5">{handle}</span>
-                <span className="text-gray-200">
-                  💡 <strong className="text-white">{project.title}</strong>
-                  {' — '}
-                  {project.description}
-                </span>
+              <p className="text-gray-200">
+                <strong className="text-white">{project.title}</strong>
+                {' — '}
+                {project.description}
               </p>
               <p className="mt-2 text-blue-400/90 text-xs leading-relaxed">
                 {project.hashtags.join(' ')}

@@ -1,11 +1,25 @@
-import { motion } from 'motion/react';
-import { ArrowRight, Code2, Share2 } from 'lucide-react';
-import { PROFILE } from '../constants';
-import profileImg from '../assets/profile.png';
+import { motion } from "motion/react";
+import { ArrowRight, FileDown } from "lucide-react";
+import { PROFILE } from "../constants";
+import profileImg from "../assets/profile.png";
+import { GitHubIcon, GitLabIcon, LinkedInIcon } from "./SocialIcons";
 
 const SOCIAL_LINKS = [
-  { Icon: Code2, href: PROFILE.github, label: 'GitHub' },
-  { Icon: Share2, href: PROFILE.linkedin, label: 'LinkedIn' },
+  {
+    Icon: LinkedInIcon,
+    href: PROFILE.linkedin,
+    label: "LinkedIn",
+    external: true,
+  },
+  { Icon: GitHubIcon, href: PROFILE.github, label: "GitHub", external: true },
+  { Icon: GitLabIcon, href: PROFILE.gitlab, label: "GitLab", external: true },
+  {
+    Icon: FileDown,
+    href: PROFILE.cv,
+    label: "Descargar CV",
+    download: PROFILE.cvFileName,
+    external: false,
+  },
 ];
 
 export default function Hero() {
@@ -37,10 +51,10 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-bold uppercase tracking-wider mb-6">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
               </span>
               Disponible para nuevos retos
             </span>
@@ -52,7 +66,9 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]"
           >
-            Construyo <span className="text-gradient">sistemas que escalan</span> bajo presión.
+            Conecto{" "}
+            <span className="text-gradient">ingeniería, datos e IA</span> para
+            construir soluciones.
           </motion.h1>
 
           <motion.p
@@ -86,17 +102,20 @@ export default function Hero() {
               transition={{ delay: 0.5 }}
               className="flex items-center gap-3"
             >
-              {SOCIAL_LINKS.map(({ Icon, href, label }) => (
+              {SOCIAL_LINKS.map(({ Icon, href, label, download, external }) => (
                 <motion.a
                   key={label}
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(download ? { download } : {})}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all text-gray-400 hover:text-white"
+                  className="group w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all text-gray-400 hover:text-white"
                   aria-label={label}
+                  title={label}
                 >
-                  <Icon className="w-6 h-6" />
+                  <Icon className={label === "GitLab" ? "w-8 h-8" : "w-6 h-6"} />
                 </motion.a>
               ))}
             </motion.div>

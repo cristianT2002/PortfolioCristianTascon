@@ -8,6 +8,11 @@ import {
   Shield,
   Zap,
 } from 'lucide-react';
+import operationsPlatformImg from './assets/6789710080b686a72cec953c_opcion hse 5 (1).png';
+import axRealOpsImg from './assets/Captura de pantalla 2026-05-24 215937.png';
+import ecopetrolLogo from './assets/images.png';
+import geoParkLogo from './assets/GeoPark.webp';
+import hocolLogo from './assets/Hocol-1024x596.webp';
 
 export const PROJECTS = [
   {
@@ -16,8 +21,8 @@ export const PROJECTS = [
     company: 'Freelancer',
     role: 'Full Stack Developer',
     period: '2025 — 2026',
-    client: 'Operador de telecomunicaciones (Colombia)',
-    sector: 'Telecomunicaciones',
+    client: 'GeoPark, Ecopetrol y Hocol — sector Oil & Gas',
+    sector: 'Oil & Gas',
     postBadge: 'Full-Stack Build',
     description:
       'Plataforma full-stack para gestión operativa de campo: despacho, seguimiento en mapa y cargas masivas de datos con validación en tiempo real.',
@@ -39,20 +44,28 @@ export const PROJECTS = [
     },
     clients: [
       {
-        name: 'Operador Telecom',
-        handle: 'telecom_colombia',
-        comment: 'Cliente · Telecomunicaciones · Gestión de campo',
-        logo: null,
+        name: 'GeoPark',
+        handle: 'geopark',
+        comment: 'Cliente · Oil & Gas · Gestión operativa de campo',
+        logo: geoParkLogo,
+      },
+      {
+        name: 'Ecopetrol',
+        handle: 'ecopetrol',
+        comment: 'Cliente · Oil & Gas · Gestión operativa de campo',
+        logo: ecopetrolLogo,
+      },
+      {
+        name: 'Hocol',
+        handle: 'hocol',
+        comment: 'Cliente · Oil & Gas · Gestión operativa de campo',
+        logo: hocolLogo,
       },
     ],
     likes: 284,
     views: 1240,
     postedAgo: 'Hace 4 meses',
-    images: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18a5?auto=format&fit=crop&q=80&w=1200',
-    ],
+    images: [operationsPlatformImg],
     link: 'https://github.com/cristianT2002',
     github: 'https://github.com/cristianT2002',
   },
@@ -100,11 +113,7 @@ export const PROJECTS = [
     likes: 412,
     views: 1890,
     postedAgo: 'Hace 1 año',
-    images: [
-      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200',
-    ],
+    images: [axRealOpsImg],
     link: 'https://github.com/cristianT2002',
     github: 'https://github.com/cristianT2002',
   },
@@ -237,6 +246,32 @@ export const SKILLS = [
   },
 ];
 
+/** Logos para el carrusel de tech stack (Simple Icons CDN) */
+export const TECH_STACK = [
+  { name: 'Python', slug: 'python', color: '3776AB' },
+  { name: 'FastAPI', slug: 'fastapi', color: '009688' },
+  { name: 'Flask', slug: 'flask', color: 'FFFFFF' },
+  { name: 'Node.js', slug: 'nodedotjs', color: '339933' },
+  { name: 'React', slug: 'react', color: '61DAFB' },
+  { name: 'JavaScript', slug: 'javascript', color: 'F7DF1E' },
+  { name: 'TypeScript', slug: 'typescript', color: '3178C6' },
+  { name: 'Tailwind CSS', slug: 'tailwindcss', color: '06B6D4' },
+  { name: 'Redux', slug: 'redux', color: '764ABC' },
+  { name: 'PostgreSQL', slug: 'postgresql', color: '4169E1' },
+  { name: 'Docker', slug: 'docker', color: '2496ED' },
+  { name: 'AWS', slug: 'amazonaws', color: 'FF9900' },
+  { name: 'Kubernetes', slug: 'kubernetes', color: '326CE5' },
+  { name: 'Grafana', slug: 'grafana', color: 'F46800' },
+  { name: 'Prometheus', slug: 'prometheus', color: 'E6522C' },
+  { name: 'OpenCV', slug: 'opencv', color: '5C3EE8' },
+  { name: 'scikit-learn', slug: 'scikitlearn', color: 'F7931E' },
+  { name: 'PyTorch', slug: 'pytorch', color: 'EE4C2C' },
+  { name: 'Apache Kafka', slug: 'apachekafka', color: 'FFFFFF' },
+];
+
+export const TECH_STACK_ROW_1 = TECH_STACK.slice(0, 10);
+export const TECH_STACK_ROW_2 = TECH_STACK.slice(10);
+
 export const CAREER = [
   {
     id: 'axure',
@@ -280,8 +315,8 @@ export const CAREER = [
 
 export const NAV_LINKS = [
   { name: 'Inicio', href: '#home', icon: Rocket },
+  { name: 'Experiencia', href: '#experience', icon: Cpu },
   { name: 'Proyectos', href: '#projects', icon: Layers },
-  { name: 'Trayectoria', href: '#experience', icon: Cpu },
   { name: 'Habilidades', href: '#skills', icon: Zap },
   { name: 'Contacto', href: '#contact', icon: MessageSquare },
 ];
@@ -289,10 +324,13 @@ export const NAV_LINKS = [
 export const PROFILE = {
   name: 'Cristian Tascón',
   title: 'Backend · Full Stack Developer',
-  instagramHandle: 'cristian.dev_fs',
+  instagramHandle: 'cristian.dev',
   email: 'cristiantmm11@outlook.com',
   location: 'Bogotá, D.C., Colombia',
   github: 'https://github.com/cristianT2002',
   linkedin: 'https://linkedin.com/in/cristiantasconm',
-  bio: 'Software Engineer con 3+ años construyendo soluciones Full Stack, especializado en Backend ',
+  gitlab: 'https://gitlab.com/cristianT2002',
+  cv: '/CV_Cristian_Tascon.pdf',
+  cvFileName: 'Cristian_Tascon_CV.pdf',
+  bio: 'Software Engineer con 3+ años construyendo soluciones basadas en el análisis de datos, especializado en Backend e integración de IA.',
 };

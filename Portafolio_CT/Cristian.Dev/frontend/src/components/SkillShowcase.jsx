@@ -1,46 +1,68 @@
-import { motion } from 'motion/react';
-import { SKILLS } from '../constants';
+import { TECH_STACK_ROW_1, TECH_STACK_ROW_2 } from '../constants';
+
+function techIconUrl(slug, color) {
+  return `https://cdn.simpleicons.org/${slug}/${color}`;
+}
+
+function TechLogoCard({ name, slug, color }) {
+  return (
+    <div
+      className="flex h-[70px] w-[70px] shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] p-4 transition-colors hover:border-white/25 hover:bg-white/[0.06]"
+      title={name}
+    >
+      <img
+        src={techIconUrl(slug, color)}
+        alt={name}
+        className="h-9 w-9 object-contain"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  );
+}
+
+function MarqueeRow({ items, reverse = false }) {
+  const loop = [...items, ...items];
+
+  return (
+    <div className="tech-marquee-fade overflow-hidden py-2.5">
+      <div
+        className={`flex w-max gap-4 pl-4 ${reverse ? 'tech-marquee-track-reverse' : 'tech-marquee-track'}`}
+      >
+        {loop.map((tech, index) => (
+          <TechLogoCard key={`${tech.slug}-${index}`} {...tech} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function SkillShowcase() {
   return (
-    <section id="skills" className="py-24 px-6 bg-white/[0.02] border-y border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Tech Stack</h2>
-          <p className="text-gray-400 max-w-lg mx-auto">
-            Herramientas y tecnologías que utilizo para dar vida a proyectos innovadores.
+    <section
+      id="skills"
+      className="relative overflow-hidden border-y border-white/5 bg-white/[0.02] py-16 md:py-24"
+    >
+      <div
+        className="pointer-events-none absolute left-1/2 top-0 h-[880px] w-[400px] max-w-[400px] -translate-x-1/2 -translate-y-24 rotate-24 rounded-[5120px] bg-gradient-to-b from-black/25 to-[#191c4d] opacity-45 blur-[64px]"
+        aria-hidden
+      />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="mb-12 flex flex-col items-center gap-4 text-center md:mb-16">
+          <h2 className="max-w-3xl text-3xl font-normal tracking-tight text-[#b6b5b9] md:text-5xl md:leading-tight md:tracking-[-0.02em]">
+            Herramientas y tecnologías que utilizo para{' '}
+            <span className="text-white">dar vida a proyectos innovadores</span>
+          </h2>
+          <p className="max-w-xl text-base leading-6 text-[#d1cece]">
+            Backend, frontend, datos, infraestructura e IA aplicada a productos
+            reales.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {SKILLS.map((category, index) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-8 rounded-3xl glass hover:border-blue-500/50 transition-colors"
-            >
-              <motion.div className="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6">
-                <category.icon className="w-6 h-6 text-blue-400" />
-              </motion.div>
-              <h3 className="text-xl font-bold mb-6">{category.name}</h3>
-              <ul className="space-y-3">
-                {category.skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-3 text-gray-400 group">
-                    <motion.div
-                      whileHover={{ width: 8 }}
-                      className="w-1 h-1 rounded-full bg-blue-500/50 transition-all group-hover:w-2"
-                    />
-                    <span className="text-sm font-medium group-hover:text-white transition-colors">
-                      {skill}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+        <div className="tech-marquee flex flex-col gap-2">
+          <MarqueeRow items={TECH_STACK_ROW_1} />
+          <MarqueeRow items={TECH_STACK_ROW_2} reverse />
         </div>
       </div>
     </section>
