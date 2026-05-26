@@ -287,37 +287,47 @@ export const CAREER = [
   {
     id: "axure",
     company: "Axure Technologies",
+    location: "Bogotá, Colombia",
     period: "DIC 2022 — Presente",
     summary:
-      "En mi trayectoria en Axure Technologies, comencé como prácticante de Ingeniería Electrónica y evolucioné a Backend engineer, con experiencia en desarrollo de sistemas full-stack e innovación: visión por computadora, monitoreo industrial y ML con impacto medible en clientes Oil & Gas y telecom.",
+      "Empecé en prácticas y hoy diseño backends y productos en producción para Oil & Gas y telecom: IA en tiempo real, arquitecturas event-driven y monitoreo industrial. Los números y el stack viven en cada proyecto.",
     roles: [
       {
         title: "Frontend Developer",
         period: "2026 — Presente",
+        narrative:
+          "Rediseño de la plataforma de monitoreo: mapas, telemetría y UX más rápida para operadores en campo.",
         projectIds: ["4"],
       },
       {
-        title: "Innovation & Development Analyst",
-        period: "2023 — 2026",
+        title: "Analista de Innovación y Desarrollo / Backend Engineer",
+        period: "JUL 2023 — 2026",
+        narrative:
+          "Refactor de sistemas de IA, APIs con FastAPI y ML predictivo con impacto directo en costos y alertas operativas.",
         projectIds: ["2", "3"],
       },
       {
-        title: "Electronics Engineering Intern",
-        period: "2022 — 2023",
+        title: "Software Engineering Intern",
+        period: "DIC 2022 — JUN 2023",
+        narrative:
+          "Primer contacto con visión por computadora y microservicios en un equipo ágil de innovación.",
         projectIds: [],
       },
     ],
   },
   {
     id: "freelance",
-    company: "Freelancer",
-    period: "2025 — 2026",
+    company: "Freelance",
+    location: "Colombia · Remoto",
+    period: "OCT 2025 — MAR 2026",
     summary:
-      "Desarrollo full-stack para operadores de telecomunicaciones con foco en automatización operativa y plataformas de gestión de campo.",
+      "Part-time construyendo una plataforma de gestión de campo para telecom: datos masivos en PostgreSQL, APIs y automatización que alivian el trabajo operativo diario.",
     roles: [
       {
-        title: "Full Stack Developer",
-        period: "2025 — 2026",
+        title: "Backend · Full Stack Developer",
+        period: "OCT 2025 — MAR 2026",
+        narrative:
+          "De la base de datos al mapa en producción: despacho, cargas masivas y validación en tiempo real.",
         projectIds: ["1"],
       },
     ],

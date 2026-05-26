@@ -21,8 +21,9 @@ export default function Experience() {
           Experiencia
         </div>
         <h2 className="text-4xl font-bold mb-4">¿Dónde he construido impacto?</h2>
-        <p className="text-gray-400 max-w-xl">
-          En mi desarrollo como profesional, me he involucrado en proyectos muy interesantes.
+        <p className="text-gray-400 max-w-2xl leading-relaxed">
+          Más de 3 años pasando de prácticas a features en producción. Este es el hilo de mi recorrido;
+          el detalle técnico y el impacto están en cada proyecto.
         </p>
       </motion.div>
 
@@ -59,7 +60,12 @@ export default function Experience() {
                   viewport={{ once: true }}
                   className="flex flex-wrap items-baseline justify-between gap-2 mb-3"
                 >
-                  <h3 className="text-2xl font-bold">{org.company}</h3>
+                  <div>
+                    <h3 className="text-2xl font-bold">{org.company}</h3>
+                    {org.location && (
+                      <p className="text-xs text-gray-500 mt-0.5">{org.location}</p>
+                    )}
+                  </div>
                   <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">
                     {org.period}
                   </span>
@@ -87,6 +93,12 @@ export default function Experience() {
                           <p className="font-semibold text-white">{role.title}</p>
                           <span className="text-xs text-gray-500 font-medium">{role.period}</span>
                         </motion.div>
+
+                        {role.narrative && (
+                          <p className="text-xs text-gray-500 leading-relaxed mb-3">
+                            {role.narrative}
+                          </p>
+                        )}
 
                         {linkedProjects.length > 0 && (
                           <div className="flex flex-wrap gap-2">
