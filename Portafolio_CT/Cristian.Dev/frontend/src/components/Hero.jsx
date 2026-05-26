@@ -66,9 +66,9 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1]"
           >
-            Conecto{" "}
-            <span className="text-gradient">ingeniería, datos e IA</span> para
-            construir soluciones.
+            Transformo{" "}
+            <span className="text-gradient">datos en decisiones </span> con{" "}
+            arquitecturas backend e Inteligencia Artificial.
           </motion.h1>
 
           <motion.p
@@ -115,7 +115,9 @@ export default function Hero() {
                   aria-label={label}
                   title={label}
                 >
-                  <Icon className={label === "GitLab" ? "w-8 h-8" : "w-6 h-6"} />
+                  <Icon
+                    className={label === "GitLab" ? "w-8 h-8" : "w-6 h-6"}
+                  />
                 </motion.a>
               ))}
             </motion.div>
