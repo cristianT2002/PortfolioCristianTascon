@@ -84,7 +84,7 @@ function ClientAvatar({ client, size = 'md' }) {
   );
 }
 
-function PostImageCarousel({ images, title, postBadge, achievements }) {
+function PostImageCarousel({ images, title, postBadge }) {
   const scrollRef = useRef(null);
   const [active, setActive] = useState(0);
   const count = images.length;
@@ -182,17 +182,6 @@ function PostImageCarousel({ images, title, postBadge, achievements }) {
         </>
       )}
 
-      <div className="absolute bottom-4 left-4 right-4 z-10 hidden sm:flex gap-2 pointer-events-none">
-        {achievements.map((item) => (
-          <div
-            key={item.label}
-            className="flex-1 min-w-0 glass px-2.5 py-2 rounded-xl text-center"
-          >
-            <p className="text-sm font-bold text-blue-300 truncate">{item.value}</p>
-            <p className="text-[9px] text-gray-400 leading-tight line-clamp-2">{item.label}</p>
-          </div>
-        ))}
-      </div>
     </motion.div>
   );
 }
@@ -221,7 +210,6 @@ function InstagramPost({ project }) {
             images={images}
             title={project.title}
             postBadge={project.postBadge}
-            achievements={project.achievements}
           />
         </div>
 
@@ -285,30 +273,50 @@ function InstagramPost({ project }) {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-white/[0.03] border border-white/8 p-4 space-y-3">
-              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                Mi rol en el proyecto
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/25 text-[11px] font-medium text-blue-200"
-                  >
-                    {tech}
-                  </span>
-                ))}
+            <div className="rounded-2xl bg-white/[0.03] border border-white/8 p-4 space-y-4">
+              <div className="space-y-2">
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                  Tecnologías
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/25 text-[11px] font-medium text-blue-200"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <ul className="space-y-1.5">
-                {project.highlights.map((item) => (
-                  <li key={item} className="flex gap-2 text-xs text-gray-400 leading-relaxed">
-                    <span className="text-rose-400 shrink-0 mt-0.5">•</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+
+              <div className="space-y-2 pt-1 border-t border-white/5">
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                  Logros
+                </p>
+                <ul className="space-y-1.5">
+                  {project.highlights.map((item) => (
+                    <li key={item} className="flex gap-2 text-xs text-gray-400 leading-relaxed">
+                      <span className="text-emerald-400 shrink-0 mt-0.5">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex gap-2 pt-1">
+                  {project.achievements.map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex-1 min-w-0 rounded-xl bg-white/[0.04] border border-white/10 px-2 py-2 text-center"
+                    >
+                      <p className="text-sm font-bold text-blue-300 truncate">{item.value}</p>
+                      <p className="text-[9px] text-gray-500 leading-tight line-clamp-2">{item.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {project.challenges?.length > 0 && (
-                <div className="pt-2 space-y-1.5">
+                <div className="space-y-2 pt-1 border-t border-white/5">
                   <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
                     Retos superados
                   </p>
@@ -322,6 +330,7 @@ function InstagramPost({ project }) {
                   </ul>
                 </div>
               )}
+
               <p className="text-[11px] text-gray-600 pt-1 border-t border-white/5">
                 {project.company} · {project.period} · {project.sector}
               </p>
