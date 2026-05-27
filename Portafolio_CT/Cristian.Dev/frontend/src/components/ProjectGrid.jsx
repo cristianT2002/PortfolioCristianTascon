@@ -19,21 +19,50 @@ function getAllStack(stack) {
   return [...(stack.frontend ?? []), ...(stack.backend ?? []), ...(stack.infra ?? [])];
 }
 
-function getProjectImages(project) {
-  if (project.images?.length) return project.images;
-  if (project.image) return [project.image];
-  return [];
+function normalizeProjectImage(image) {
+  if (typeof image === 'string') {
+    return { src: image, fit: 'contain', objectPosition: 'center', padding: 'default' };
+  }
+
+  return {
+    src: image.src,
+    fit: image.fit ?? 'contain',
+    objectPosition: image.objectPosition ?? 'center',
+    padding: image.padding ?? 'default',
+  };
 }
+
+function getProjectImages(project) {
+  const raw = project.images?.length
+    ? project.images
+    : project.image
+      ? [project.image]
+      : [];
+
+  return raw.map(normalizeProjectImage);
+}
+
+const IMAGE_PADDING = {
+  none: 'p-0',
+  tight: 'p-1 sm:p-2',
+  default: 'p-3 sm:p-5',
+};
 
 function ClientAvatar({ client, size = 'md' }) {
   const sizeClass = size === 'sm' ? 'w-7 h-7 text-[10px]' : 'w-9 h-9 text-xs';
 
   if (client.logo) {
+    const isDarkLogo = client.logoBg === 'black';
+
     return (
       <img
         src={client.logo}
         alt={client.name}
-        className={`${sizeClass} rounded-2xl object-contain bg-white p-0.5 border border-white/10 shrink-0`}
+        className={`${sizeClass} object-contain shrink-0 ${
+          isDarkLogo
+            ? 'rounded-full bg-black p-1 border border-white/15'
+            : 'rounded-2xl bg-white p-0.5 border border-white/10'
+        }`}
       />
     );
   }
@@ -90,22 +119,27 @@ function PostImageCarousel({ images, title, postBadge, achievements }) {
         className="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x"
         aria-label={`Galería de ${title}`}
       >
-        {images.map((src, index) => (
+        {images.map((image, index) => (
           <div
-            key={`${src}-${index}`}
-            className="relative h-full w-full shrink-0 snap-center snap-always"
+            key={`${image.src}-${index}`}
+            className={`relative flex h-full w-full shrink-0 snap-center snap-always items-center justify-center overflow-hidden bg-[#0a0a0a] ${IMAGE_PADDING[image.padding] ?? IMAGE_PADDING.default}`}
           >
             <img
-              src={src}
+              src={image.src}
               alt={`${title} — imagen ${index + 1}`}
-              className="absolute inset-0 h-full w-full object-cover"
+              className={
+                image.fit === 'cover'
+                  ? 'h-full w-full object-cover drop-shadow-lg'
+                  : 'max-h-full max-w-full object-contain object-center drop-shadow-lg'
+              }
+              style={{ objectPosition: image.objectPosition }}
               draggable={false}
             />
           </div>
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/25 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/15 pointer-events-none" />
 
       <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-[11px] font-bold text-emerald-300 border border-emerald-500/30 pointer-events-none">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -265,16 +299,6 @@ function InstagramPost({ project }) {
                   </span>
                 ))}
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/25 text-[11px] font-medium text-blue-200"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
               <ul className="space-y-1.5">
                 {project.highlights.map((item) => (
                   <li key={item} className="flex gap-2 text-xs text-gray-400 leading-relaxed">
@@ -283,6 +307,21 @@ function InstagramPost({ project }) {
                   </li>
                 ))}
               </ul>
+              {project.challenges?.length > 0 && (
+                <div className="pt-2 space-y-1.5">
+                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                    Retos superados
+                  </p>
+                  <ul className="space-y-1.5">
+                    {project.challenges.map((item) => (
+                      <li key={item} className="flex gap-2 text-xs text-gray-500 leading-relaxed">
+                        <span className="text-blue-400/80 shrink-0 mt-0.5">→</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <p className="text-[11px] text-gray-600 pt-1 border-t border-white/5">
                 {project.company} · {project.period} · {project.sector}
               </p>
@@ -337,28 +376,34 @@ function InstagramPost({ project }) {
 
           <div className="px-4 py-3 border-t border-white/10 shrink-0 bg-white/[0.02]">
             <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">
-              Clientes del proyecto
+              {project.clientsSectionTitle ?? 'Clientes del proyecto'}
             </p>
-            <div className="space-y-3 max-h-36 overflow-y-auto scrollbar-hide">
-              {project.clients.map((client) => (
-                <motion.div
-                  key={client.handle}
-                  initial={{ opacity: 0, x: -6 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="flex items-start gap-2.5"
-                >
-                  <ClientAvatar client={client} />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs leading-snug">
-                      <span className="font-semibold text-white mr-1">{client.handle}</span>
-                      <span className="text-gray-400">{client.comment}</span>
-                    </p>
-                    <p className="text-[10px] text-gray-600 mt-0.5">{client.name}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {project.clients.length > 0 ? (
+              <div className="space-y-3 max-h-36 overflow-y-auto scrollbar-hide">
+                {project.clients.map((client) => (
+                  <motion.div
+                    key={client.handle}
+                    initial={{ opacity: 0, x: -6 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="flex items-start gap-2.5"
+                  >
+                    <ClientAvatar client={client} />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs leading-snug">
+                        <span className="font-semibold text-white mr-1">{client.handle}</span>
+                        <span className="text-gray-400">{client.comment}</span>
+                      </p>
+                      <p className="text-[10px] text-gray-600 mt-0.5">{client.name}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-xs text-gray-400 leading-relaxed">
+                {project.clientsEmptyMessage}
+              </p>
+            )}
 
             <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
               <img
@@ -367,13 +412,25 @@ function InstagramPost({ project }) {
                 className="w-7 h-7 rounded-full object-cover border border-white/10 shrink-0"
               />
               <div className="flex-1 flex items-center gap-2 min-w-0">
-                <motion.div className="flex -space-x-1.5 shrink-0">
-                  {project.clients.map((client) => (
-                    <ClientAvatar key={client.handle} client={client} size="sm" />
-                  ))}
-                </motion.div>
+                {project.clients.length > 0 && (
+                  <motion.div className="flex -space-x-1.5 shrink-0">
+                    {project.clients.map((client) => (
+                      <ClientAvatar key={client.handle} client={client} size="sm" />
+                    ))}
+                  </motion.div>
+                )}
                 <span className="text-xs text-gray-600 truncate">
-                  {project.clients.length} cliente{project.clients.length !== 1 ? 's' : ''} ·{' '}
+                  {project.clients.length > 0
+                    ? `${project.clients.length} ${
+                        project.clientsSectionTitle === 'Institución académica'
+                          ? project.clients.length === 1
+                            ? 'institución'
+                            : 'instituciones'
+                          : project.clients.length === 1
+                            ? 'cliente'
+                            : 'clientes'
+                      } · `
+                    : ''}
                   {project.client}
                 </span>
               </div>

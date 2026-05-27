@@ -1,0 +1,91 @@
+Proyecto 1
+
+Nombre: HSE Video Analytics
+
+Definicion:
+ Backend python para detección de riesgos e incumplimiento de EPPs (p. ej. cascos, accesos
+ no autorizados) con YOLO y OpenCV deep learning, procesando streams RTSP en tiempo real e 
+ inferencia en GPU. Pipeline de alertas con notificaciones por SMTP y 
+ WhatsApp API, arquitectura event-driven y clean architecture para desacoplar detección, 
+ notificación y visualización.
+
+Problemas que se resuelven:
+ Se minimizan los riesgos de accidentes de personas en operaciones como en la mesa 
+ rotaria, planchada, contrapozo y se notifica para avisar que se estan incumpliendo
+ usar equipos de seguirdad o realizar acciones Problemas
+
+Problematicas presentadas en el proyecto pero resueltas
+ un amplio entrenamiento de dataset, una arquitectura compleja, mejorar la 
+ visualización del streaming mostrando la inferencia, muchas colas de eventos
+
+
+Proyecto 2
+
+Nombre: AX Real Ops
+
+Definicion:
+
+ base de datos y Plataforma web con python Fast Api  API REST, arquitectura multi-schema en PostgreSQL y frontend con react axios 
+ dashboards interactivos, mapas con leaflet y exportación de reportes .
+ Implementé seguridad integral: autenticación por sesiones, 2FA por correo, compresión HTTP y despliegue con
+ proxy reverso bajo HTTPS.
+
+Problemas que se resuelven:
+ centralización de la información, rediseño del sistema de control de actividades realizadas por personal, acceso a datos transformados en información valiosa, aporte al cliente de soluciones a problemas como automatización de el llenado de información manual,  facilitación de creación de sitios, modulos de configuración para evitar cambiar cosas directamente desde la infraestructura
+
+Problematicas o dificultades presentadas en el proyecto pero resueltas
+ una inmensa cantidad de datos, muchas tablas para muchas cosas, timeout debido a mucha información presentada, entender al cliente y plasmar la idea que el queria en la plataforma
+
+Proyecto 3
+
+Nombre: Diseño e implementación de un prototipo IoT de monitoreo remoto para un sistema solar
+fotovoltaico.
+
+
+Definicion:
+
+ Este proyecto se centra en el diseño e implementación de un dispositivo IoT (Internet de
+las Cosas) para el monitoreo remoto de variables eléctricas y ambientales en un sistema solar
+fotovoltaico autónomo. La metodología empleada involucra el monitoreo en tiempo real de un
+panel solar independiente, con especial atención en la medición de variables eléctricas y
+ambientales clave, como la temperatura y la irradiancia solar. El objetivo principal es
+comprender cómo estas variables ambientales afectan el comportamiento eléctrico del panel
+solar.
+El proyecto pretende aportar conocimientos significativos sobre la interacción entre las
+condiciones ambientales y el rendimiento de los sistemas fotovoltaicos. Este entendimiento es
+crucial para optimizar el diseño y la eficiencia de estos sistemas en aplicaciones futuras.
+La relevancia de esta investigación radica en su capacidad para facilitar el monitoreo en
+tiempo real del comportamiento de los sistemas solares fotovoltaicos. Esto no solo permite una
+mejor comprensión y manejo de estos sistemas, sino que también abre caminos para mejorar su
+eficiencia y fiabilidad en diversos entornos operativos. Este proyecto representa un paso adelante
+significativo en el campo de las energías renovables, subrayando la importancia de la integración
+de tecnologías IoT en la gestión de recursos energéticos sostenibles
+
+USo de AWS Clase de instancia db.t3.micro
+Motor de base datos Mariadb, python con flask con mysql PARA GUARDAR DATOS e intefaz con css y html
+
+
+
+Problemas que se resuelven:
+ evaluacion del sistema LoRa y su uso para medicion de paneles solares
+
+Problematicas o dificultades presentadas en el proyecto pero resueltas
+ hardware y software, distancia de los nodos, intemperie
+
+
+ Proyecto 4
+
+Nombre: HCC Viewer
+
+
+Definicion:
+
+ Este proyecto se centra en analizar el comportamiento del consumo de una antena satelital mediante un modelo de machine learning analizando aproximadamente segun el uso del consumo cuando se va a terminar usando sk learn y tensorflor numpy pandas y frontend react tailwind conexion con fastapi
+
+
+
+Problemas que se resuelven:
+ evitar el sobrecosto del consumo
+
+Problematicas o dificultades presentadas en el proyecto pero resueltas
+ modelamiento del modelo, entrenamiento, uso de algoritmos complejos para el calculo correcto aproximado

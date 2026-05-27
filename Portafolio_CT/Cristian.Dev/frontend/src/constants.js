@@ -9,41 +9,108 @@ import {
   Zap,
 } from "lucide-react";
 import operationsPlatformImg from "./assets/6789710080b686a72cec953c_opcion hse 5 (1).png";
-import axRealOpsImg from "./assets/Captura de pantalla 2026-05-24 215937.png";
-import predictiveAnalyticsImg from "./assets/image.png";
+import operationsPlatformLoginImg from "./assets/Captura de pantalla 2026-05-26 213244.png";
+import axRealOpsImg from "./assets/Captura de pantalla 2026-05-26 213015.png";
+import predictiveAnalyticsImg1 from "./assets/Captura de pantalla 2026-05-26 215615.png";
+import predictiveAnalyticsImg2 from "./assets/Captura de pantalla 2026-05-26 214737.png";
+import predictiveAnalyticsImg3 from "./assets/Captura de pantalla 2026-05-26 214700.png";
 import industrialMonitoringImg1 from "./assets/Captura de pantalla 2026-05-25 203247.png";
 import industrialMonitoringImg2 from "./assets/Captura de pantalla 2026-05-25 203410.png";
+import industrialMonitoringImg3 from "./assets/Gemini_Generated_Image_y5n97jy5n97jy5n9 1.png";
 import ecopetrolLogo from "./assets/images.png";
 import geoParkLogo from "./assets/GeoPark.webp";
-import hocolLogo from "./assets/Hocol-1024x596.webp";
+import hocolLogo from "./assets/naborsLogo.png";
+import axMexicoLogo from "./assets/LOGO_AXMX.png";
+import universidadLogo from "./assets/logoU.png";
 
 export const PROJECTS = [
   {
     id: "1",
-    title: "Operations Management Platform",
+    title: "HSE Video Analytics",
+    company: "Axure Technologies",
+    role: "Analista de Innovación y Desarrollo",
+    period: "2023 — 2026",
+    client: "AX México — sector Oil & Gas",
+    sector: "Seguridad industrial",
+    postBadge: "AI · Computer Vision",
+    description:
+      "Backend en Python para detectar riesgos e incumplimiento de EPP (cascos, accesos no autorizados) con YOLO y OpenCV sobre streams RTSP e inferencia en GPU. Alertas por SMTP y WhatsApp bajo arquitectura event-driven y clean architecture.",
+    hashtags: ["#yolo", "#opencv", "#fastapi", "#oilandgas", "#hse"],
+    highlights: [
+      "Menor riesgo en mesa rotaria, planchada y contrapozo con monitoreo continuo",
+      "Avisos cuando falta EPP o hay conductas fuera de protocolo",
+      "Detección, notificación y visualización desacopladas para escalar sin fricción",
+    ],
+    challenges: [
+      "Ampliar y afinar el dataset de entrenamiento del modelo",
+      "Orquestar colas y eventos sin saturar el sistema",
+      "Mostrar la inferencia en vivo sobre el streaming",
+    ],
+    achievements: [
+      { value: "85%+", label: "precisión en detección EPP" },
+      { value: "50%", label: "menos consumo de memoria" },
+      { value: "15–20", label: "alertas diarias en producción" },
+    ],
+    stack: {
+      frontend: ["Dashboard de monitoreo"],
+      backend: ["Python", "FastAPI", "YOLO", "OpenCV"],
+      infra: ["Docker", "GPU", "Grafana", "Prometheus"],
+    },
+    clients: [
+      {
+        name: "AX México",
+        handle: "axmexico",
+        comment: "Cliente · Oil & Gas · Detección de riesgos industriales",
+        logo: axMexicoLogo,
+        logoBg: "black",
+      },
+    ],
+    likes: 412,
+    views: 1890,
+    postedAgo: "Hace 1 año",
+    images: [
+      operationsPlatformImg,
+      {
+        src: operationsPlatformLoginImg,
+        fit: "cover",
+        objectPosition: "center",
+        padding: "tight",
+      },
+    ],
+    link: "https://github.com/cristianT2002",
+    github: "https://github.com/cristianT2002",
+  },
+  {
+    id: "2",
+    title: "AX Real Ops",
     company: "Freelancer",
-    role: "Full Stack Developer",
+    role: "Backend · Full Stack Developer",
     period: "2025 — 2026",
     client: "GeoPark, Ecopetrol y Hocol — sector Oil & Gas",
     sector: "Oil & Gas",
-    postBadge: "Full-Stack Build",
+    postBadge: "Full-Stack · Operations",
     description:
-      "Plataforma full-stack para gestión operativa de campo: despacho, seguimiento en mapa y cargas masivas de datos con validación en tiempo real.",
-    hashtags: ["#fullstack", "#react", "#flask", "#telecom", "#fieldops"],
+      "Plataforma web con API REST en FastAPI y PostgreSQL multi-schema: centraliza operaciones de campo, mapas Leaflet, dashboards y exportación de reportes. Incluye sesiones, 2FA por correo y despliegue seguro con proxy reverso HTTPS.",
+    hashtags: ["#fullstack", "#fastapi", "#react", "#postgresql", "#fieldops"],
     highlights: [
-      "Automatización de cargas masivas con validación en tiempo real",
-      "Mapa Leaflet con seguimiento de órdenes y estado operativo",
-      "PostgreSQL multi-esquema por operación y región",
+      "Centralización de datos y rediseño del control de actividades en campo",
+      "Menos carga manual: automatización de registros, sitios y módulos de configuración",
+      "Información operativa lista para decidir, sin tocar la infraestructura directamente",
+    ],
+    challenges: [
+      "Modelar gran volumen de datos en múltiples tablas y dominios",
+      "Resolver timeouts y cuellos de botella con consultas optimizadas",
+      "Alinear la visión del cliente con flujos claros en la plataforma",
     ],
     achievements: [
       { value: "40%", label: "menos esfuerzo manual en cargas" },
+      { value: "35%", label: "mejora en tiempos de consulta" },
       { value: "Multi-schema", label: "PostgreSQL por operación" },
-      { value: "Tiempo real", label: "mapa y estado de órdenes" },
     ],
     stack: {
-      frontend: ["React", "Redux", "Leaflet", "Tailwind"],
-      backend: ["Flask", "SQLAlchemy", "REST API"],
-      infra: ["PostgreSQL", "Docker"],
+      frontend: ["React", "Redux", "Axios", "Leaflet"],
+      backend: ["Python", "FastAPI", "REST API", "pytest"],
+      infra: ["PostgreSQL", "Docker", "HTTPS"],
     },
     clients: [
       {
@@ -68,159 +135,112 @@ export const PROJECTS = [
     likes: 284,
     views: 1240,
     postedAgo: "Hace 4 meses",
-    images: [operationsPlatformImg],
-    link: "https://github.com/cristianT2002",
-    github: "https://github.com/cristianT2002",
-  },
-  {
-    id: "2",
-    title: "Industrial Risk Detection System",
-    company: "Axure Technologies",
-    role: "Innovation & Development Analyst",
-    period: "2023 — 2026",
-    client: "Plantas industriales — sector Oil & Gas",
-    sector: "Seguridad industrial",
-    postBadge: "AI · Computer Vision",
-    description:
-      "Backend en tiempo real para detección de EPP y accesos no autorizados con YOLO + OpenCV. Pipeline de alertas por SMTP y WhatsApp integrado a arquitectura orientada a eventos.",
-    hashtags: ["#yolo", "#opencv", "#fastapi", "#oilandgas", "#safety"],
-    highlights: [
-      "Detección de EPP y accesos no autorizados con 85%+ de precisión",
-      "Event bus para arquitectura desacoplada y escalable",
-      "Alertas automáticas por SMTP y WhatsApp en tiempo real",
-    ],
-    achievements: [
-      { value: "85%+", label: "precisión en detección EPP" },
-      { value: "Event bus", label: "arquitectura desacoplada" },
-      { value: "Alertas", label: "SMTP + WhatsApp en tiempo real" },
-    ],
-    stack: {
-      frontend: ["Dashboard interno"],
-      backend: ["Python", "FastAPI", "YOLO", "OpenCV"],
-      infra: ["Docker", "GPU", "Grafana", "Prometheus"],
-    },
-    clients: [
+    images: [
       {
-        name: "Axure Technologies",
-        handle: "axure_technologies",
-        comment: "Empresa · Oil & Gas · Seguridad industrial",
-        logo: null,
-      },
-      {
-        name: "Planta Industrial",
-        handle: "oilgas_planta",
-        comment: "Cliente · Monitoreo EPP en producción",
-        logo: null,
+        src: axRealOpsImg,
+        fit: "cover",
+        objectPosition: "center",
+        padding: "tight",
       },
     ],
-    likes: 412,
-    views: 1890,
-    postedAgo: "Hace 1 año",
-    images: [axRealOpsImg],
     link: "https://github.com/cristianT2002",
     github: "https://github.com/cristianT2002",
   },
   {
     id: "3",
-    title: "Predictive Analytics — Telecom",
-    company: "Axure Technologies",
-    role: "Innovation & Development Analyst",
-    period: "2023 — 2025",
-    client: "Infraestructura de red — operadores telecom",
-    sector: "Telecomunicaciones",
-    postBadge: "ML · Predictive",
+    title: "Monitoreo IoT — Solar Fotovoltaico",
+    company: "Universidad de San Buenaventura",
+    role: "Tesis de grado · Ingeniería Electrónica",
+    period: "2023 — 2024",
+    client: "Universidad de San Buenaventura — tesis de grado",
+    clientsSectionTitle: "Institución académica",
+    sector: "Energía solar · IoT",
+    postBadge: "IoT · Tesis",
     description:
-      "Solución de ML con integración PRTG para estimar agotamiento de consumo en infraestructura crítica y anticipar sobreconsumo antes de que impacte costos.",
-    hashtags: [
-      "#machinelearning",
-      "#prtg",
-      "#fastapi",
-      "#telecom",
-      "#analytics",
-    ],
+      "Prototipo IoT para monitoreo remoto de variables eléctricas y ambientales (temperatura, irradiancia) en un panel solar autónomo. Telemetría con LoRa, almacenamiento en MariaDB (AWS) e interfaz web con Flask.",
+    hashtags: ["#iot", "#solar", "#lora", "#flask", "#tesis"],
     highlights: [
-      "Integración nativa con PRTG para métricas de infraestructura",
-      "Modelos predictivos de agotamiento de consumo en producción",
-      "96% de reducción en costos por sobreconsumo detectado",
+      "Relación clara entre condiciones ambientales y rendimiento del panel",
+      "Evaluación de LoRa como enlace para medición en campo",
+      "Base para optimizar diseño y eficiencia de sistemas fotovoltaicos",
+    ],
+    challenges: [
+      "Integración hardware–software en condiciones de intemperie",
+      "Alcance y estabilidad entre nodos LoRa",
+      "Sincronizar captura, almacenamiento y visualización de datos",
     ],
     achievements: [
-      { value: "96%", label: "reducción de costos por sobreconsumo" },
-      { value: "PRTG", label: "integración nativa de métricas" },
-      { value: "ML", label: "modelos predictivos en producción" },
+      { value: "IoT", label: "prototipo en campo" },
+      { value: "LoRa", label: "telemetría remota" },
+      { value: "AWS", label: "MariaDB en la nube" },
     ],
     stack: {
-      frontend: ["Dashboards de métricas"],
-      backend: ["Python", "FastAPI", "scikit-learn"],
-      infra: ["PRTG API", "PostgreSQL"],
+      frontend: ["HTML", "CSS"],
+      backend: ["Python", "Flask"],
+      infra: ["MariaDB", "AWS EC2", "LoRa"],
     },
     clients: [
       {
-        name: "Axure Technologies",
-        handle: "axure_technologies",
-        comment: "Empresa · Infraestructura de red",
-        logo: null,
-      },
-      {
-        name: "Operador de Red",
-        handle: "telecom_infra",
-        comment: "Cliente · Predicción de consumo crítico",
-        logo: null,
+        name: "Universidad de San Buenaventura",
+        handle: "usb_bogota",
+        comment: "Tesis de grado · Monitoreo IoT y energía solar",
+        logo: universidadLogo,
       },
     ],
     likes: 356,
     views: 1629,
     postedAgo: "Hace 8 meses",
-    images: [predictiveAnalyticsImg],
+    images: [
+      predictiveAnalyticsImg1,
+      predictiveAnalyticsImg2,
+      predictiveAnalyticsImg3,
+    ],
     link: "https://github.com/cristianT2002",
     github: "https://github.com/cristianT2002",
   },
   {
     id: "4",
-    title: "Industrial Monitoring Dashboard",
+    title: "HCC Viewer",
     company: "Axure Technologies",
-    role: "Frontend Developer",
-    period: "2026 — Presente",
-    client: "Clientes Oil & Gas — monitoreo de activos",
-    sector: "Oil & Gas",
-    postBadge: "Frontend · Real-time",
+    role: "Frontend Developer · ML",
+    period: "2025 — Presente",
+    client: "Proyecto interno — Axure Technologies",
+    clientsSectionTitle: "Contexto del proyecto",
+    clientsEmptyMessage:
+      "Desarrollo interno en Axure Technologies. Sin clientes externos.",
+    sector: "Telecomunicaciones",
+    postBadge: "ML · Predictive",
     description:
-      "Rediseño de plataforma web de monitoreo industrial: mapa interactivo Leaflet, dashboards en tiempo real y arquitectura de componentes optimizada para operadores de campo.",
-    hashtags: ["#react", "#leaflet", "#oilandgas", "#dashboard", "#realtime"],
+      "Plataforma para analizar el consumo de antenas satelitales y estimar cuándo se agotará la capacidad contratada. Modelos con scikit-learn y TensorFlow, API en FastAPI y frontend en React con Tailwind.",
+    hashtags: ["#machinelearning", "#react", "#fastapi", "#telecom", "#satellite"],
     highlights: [
-      "Mapa Leaflet con telemetría y activos en tiempo real",
-      "30% menos tiempo de respuesta en la interfaz",
-      "Arquitectura de componentes React escalable para operadores",
+      "Anticipación de sobreconsumo antes de generar costos por excedentes",
+      "Predicción basada en patrones reales de uso de la antena",
+      "Dashboard claro para decisiones operativas del equipo",
+    ],
+    challenges: [
+      "Modelar y entrenar con datos históricos de consumo",
+      "Elegir algoritmos que den estimaciones confiables en producción",
+      "Unificar modelo, API e interfaz en un solo flujo",
     ],
     achievements: [
+      { value: "96%", label: "menos costos por sobreconsumo" },
       { value: "30%", label: "menos tiempo de respuesta UI" },
-      { value: "Tiempo real", label: "telemetría en mapa y paneles" },
-      { value: "React", label: "arquitectura de componentes escalable" },
+      { value: "ML", label: "modelo predictivo en producción" },
     ],
     stack: {
-      frontend: ["React", "Leaflet", "Tailwind CSS"],
-      backend: ["REST API", "WebSockets"],
-      infra: ["Docker", "CI/CD"],
+      frontend: ["React", "Tailwind CSS", "Axios"],
+      backend: ["Python", "FastAPI", "scikit-learn", "TensorFlow"],
+      infra: ["NumPy", "Pandas", "Docker"],
     },
-    clients: [
-      {
-        name: "Axure Technologies",
-        handle: "axure_technologies",
-        comment: "Empresa · Oil & Gas · Monitoreo industrial",
-        logo: null,
-      },
-      {
-        name: "Cliente Oil & Gas",
-        handle: "oilgas_monitoring",
-        comment: "Cliente · Activos en campo · Tiempo real",
-        logo: null,
-      },
-    ],
+    clients: [],
     likes: 198,
     views: 890,
     postedAgo: "Hace 2 meses",
     images: [
-      industrialMonitoringImg1,
-      industrialMonitoringImg2,
+      { src: industrialMonitoringImg1, fit: "cover", objectPosition: "top center", padding: "tight" },
+      { src: industrialMonitoringImg2, fit: "cover", objectPosition: "top center", padding: "tight" },
+      industrialMonitoringImg3,
     ],
     link: "https://github.com/cristianT2002",
     github: "https://github.com/cristianT2002",
@@ -290,27 +310,27 @@ export const CAREER = [
     location: "Bogotá, Colombia",
     period: "DIC 2022 — Presente",
     summary:
-      "Empecé en prácticas y hoy diseño backends y productos en producción para Oil & Gas y telecom: IA en tiempo real, arquitecturas event-driven y monitoreo industrial. Los números y el stack viven en cada proyecto.",
+      "De prácticas a productos en producción para Oil & Gas y telecom: visión por computadora en tiempo real, arquitecturas event-driven, APIs con FastAPI y modelos predictivos con impacto en costos operativos.",
     roles: [
       {
         title: "Frontend Developer",
-        period: "2026 — Presente",
+        period: "2025 — Presente",
         narrative:
-          "Rediseño de la plataforma de monitoreo: mapas, telemetría y UX más rápida para operadores en campo.",
+          "HCC Viewer: consumo satelital, predicción de agotamiento y dashboard React con respuesta más rápida para el equipo.",
         projectIds: ["4"],
       },
       {
         title: "Analista de Innovación y Desarrollo / Backend Engineer",
-        period: "JUL 2023 — 2026",
+        period: "JUL 2023 — 2025",
         narrative:
-          "Refactor de sistemas de IA, APIs con FastAPI y ML predictivo con impacto directo en costos y alertas operativas.",
-        projectIds: ["2", "3"],
+          "HSE Video Analytics: YOLO en GPU, alertas por WhatsApp y clean architecture; 50 % menos memoria y 85 %+ de precisión en campo.",
+        projectIds: ["1"],
       },
       {
         title: "Software Engineering Intern",
         period: "DIC 2022 — JUN 2023",
         narrative:
-          "Primer contacto con visión por computadora y microservicios en un equipo ágil de innovación.",
+          "Módulos de visión por computadora y primeros microservicios bajo metodología ágil.",
         projectIds: [],
       },
     ],
@@ -321,14 +341,14 @@ export const CAREER = [
     location: "Colombia · Remoto",
     period: "OCT 2025 — MAR 2026",
     summary:
-      "Part-time construyendo una plataforma de gestión de campo para telecom: datos masivos en PostgreSQL, APIs y automatización que alivian el trabajo operativo diario.",
+      "Part-time en AX Real Ops: PostgreSQL multi-schema, APIs FastAPI y automatización para operaciones de campo en Oil & Gas.",
     roles: [
       {
         title: "Backend · Full Stack Developer",
         period: "OCT 2025 — MAR 2026",
         narrative:
-          "De la base de datos al mapa en producción: despacho, cargas masivas y validación en tiempo real.",
-        projectIds: ["1"],
+          "Plataforma full-stack con mapas, reportes, 2FA y despliegue seguro; menos trabajo manual y consultas más rápidas.",
+        projectIds: ["2"],
       },
     ],
   },
