@@ -1,6 +1,7 @@
-import { useCallback, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { PROJECTS, PROFILE } from '../constants';
+import { fetchEngagement, postProjectComment, toggleProjectLike } from '../api';
 import profileImg from '../assets/FotoPerfil.png';
 import {
   BadgeCheck,
@@ -186,10 +187,115 @@ function PostImageCarousel({ images, title, postBadge }) {
   );
 }
 
-function InstagramPost({ project }) {
+const LIKES_STORAGE_KEY = 'portfolio-liked-projects';
+
+function getStoredLikes() {
+  try {
+    const raw = localStorage.getItem(LIKES_STORAGE_KEY);
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function setStoredLike(projectId, liked) {
+  const current = new Set(getStoredLikes());
+  if (liked) {
+    current.add(projectId);
+  } else {
+    current.delete(projectId);
+  }
+  localStorage.setItem(LIKES_STORAGE_KEY, JSON.stringify([...current]));
+}
+
+function formatCommentDate(isoDate) {
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) return '';
+
+  return date.toLocaleDateString('es-CO', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+function InstagramPost({ project, engagement, onEngagementChange }) {
   const techStack = getAllStack(project.stack);
   const handle = PROFILE.instagramHandle;
   const images = getProjectImages(project);
+
+  const likes = engagement?.likes ?? project.likes;
+  const comments = engagement?.comments ?? [];
+
+  const [isLiked, setIsLiked] = useState(() => getStoredLikes().includes(project.id));
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [isLikeLoading, setIsLikeLoading] = useState(false);
+  const [commentAuthor, setCommentAuthor] = useState('');
+  const [commentText, setCommentText] = useState('');
+  const [isCommentLoading, setIsCommentLoading] = useState(false);
+  const [commentFeedback, setCommentFeedback] = useState('');
+  const commentInputRef = useRef(null);
+
+  const handleToggleLike = async () => {
+    if (isLikeLoading) return;
+
+    const nextLiked = !isLiked;
+    const action = nextLiked ? 'like' : 'unlike';
+
+    setIsLikeLoading(true);
+
+    try {
+      const data = await toggleProjectLike(project.id, action);
+      setIsLiked(nextLiked);
+      setStoredLike(project.id, nextLiked);
+      onEngagementChange(project.id, {
+        likes: data.likes,
+        comments: data.comments,
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLikeLoading(false);
+    }
+  };
+
+  const openComments = () => {
+    setIsCommentsOpen(true);
+    setTimeout(() => commentInputRef.current?.focus(), 120);
+  };
+
+  const handleSubmitComment = async (event) => {
+    event.preventDefault();
+    if (isCommentLoading) return;
+
+    const author = commentAuthor.trim();
+    const text = commentText.trim();
+
+    if (!author || !text) {
+      setCommentFeedback('Escribe tu nombre y comentario.');
+      return;
+    }
+
+    setIsCommentLoading(true);
+    setCommentFeedback('');
+
+    try {
+      const data = await postProjectComment(project.id, author, text);
+      onEngagementChange(project.id, {
+        likes: data.likes,
+        comments: data.comments,
+      });
+      setCommentText('');
+      setIsCommentsOpen(true);
+      setCommentFeedback('Comentario publicado.');
+    } catch (error) {
+      setCommentFeedback(error.message || 'No se pudo publicar el comentario.');
+    } finally {
+      setIsCommentLoading(false);
+    }
+  };
 
   return (
     <motion.article
@@ -343,18 +449,27 @@ function InstagramPost({ project }) {
                 <motion.button
                   type="button"
                   whileTap={{ scale: 0.9 }}
-                  className="text-gray-300 hover:text-rose-400 transition-colors"
-                  aria-label="Me gusta"
+                  disabled={isLikeLoading}
+                  onClick={handleToggleLike}
+                  className={`transition-colors ${
+                    isLiked ? 'text-rose-500' : 'text-gray-300 hover:text-rose-400'
+                  }`}
+                  aria-label={isLiked ? 'Quitar me gusta' : 'Me gusta'}
+                  aria-pressed={isLiked}
                 >
-                  <Heart className="w-6 h-6" />
+                  <Heart className={`w-6 h-6 ${isLiked ? 'fill-current' : ''}`} />
                 </motion.button>
                 <motion.button
                   type="button"
                   whileTap={{ scale: 0.9 }}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  onClick={() => (isCommentsOpen ? setIsCommentsOpen(false) : openComments())}
+                  className={`transition-colors ${
+                    isCommentsOpen ? 'text-white' : 'text-gray-300 hover:text-white'
+                  }`}
                   aria-label="Comentarios"
+                  aria-expanded={isCommentsOpen}
                 >
-                  <MessageCircle className="w-6 h-6" />
+                  <MessageCircle className={`w-6 h-6 ${isCommentsOpen ? 'fill-white/20' : ''}`} />
                 </motion.button>
                 <motion.a
                   href={project.link}
@@ -377,10 +492,90 @@ function InstagramPost({ project }) {
               </motion.button>
             </div>
 
-            <p className="text-sm font-semibold">{project.likes.toLocaleString('es-CO')} Me gusta</p>
+            <p className="text-sm font-semibold">
+              {likes.toLocaleString('es-CO')} Me gusta
+              {comments.length > 0 ? (
+                <span className="text-gray-500 font-normal">
+                  {' '}
+                  · {comments.length} {comments.length === 1 ? 'comentario' : 'comentarios'}
+                </span>
+              ) : null}
+            </p>
             <p className="text-[10px] text-gray-500 uppercase tracking-wider">
               {project.views.toLocaleString('es-CO')} reproducciones · {project.postedAgo}
             </p>
+
+            <AnimatePresence>
+              {isCommentsOpen ? (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-3 border-t border-white/10 space-y-3">
+                    <div className="max-h-44 overflow-y-auto space-y-3 scrollbar-hide pr-1">
+                      {comments.length > 0 ? (
+                        comments.map((comment) => (
+                          <div key={comment.id} className="flex items-start gap-2.5">
+                            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-[10px] font-bold text-white shrink-0">
+                              {comment.author.slice(0, 1).toUpperCase()}
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-xs leading-snug">
+                                <span className="font-semibold text-white mr-1.5">
+                                  {comment.author}
+                                </span>
+                                <span className="text-gray-300">{comment.text}</span>
+                              </p>
+                              <p className="text-[10px] text-gray-600 mt-1">
+                                {formatCommentDate(comment.createdAt)}
+                              </p>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-xs text-gray-500">
+                          Sé el primero en comentar este proyecto.
+                        </p>
+                      )}
+                    </div>
+
+                    <form onSubmit={handleSubmitComment} className="space-y-2">
+                      <input
+                        type="text"
+                        value={commentAuthor}
+                        onChange={(event) => setCommentAuthor(event.target.value)}
+                        placeholder="Tu nombre"
+                        maxLength={60}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500/50"
+                      />
+                      <div className="flex items-center gap-2">
+                        <input
+                          ref={commentInputRef}
+                          type="text"
+                          value={commentText}
+                          onChange={(event) => setCommentText(event.target.value)}
+                          placeholder="Escribe un comentario..."
+                          maxLength={500}
+                          className="flex-1 bg-transparent border-none text-sm placeholder:text-gray-600 focus:outline-none"
+                        />
+                        <button
+                          type="submit"
+                          disabled={isCommentLoading || !commentText.trim() || !commentAuthor.trim()}
+                          className="text-xs font-semibold text-blue-400 disabled:text-gray-600 hover:text-blue-300 transition-colors shrink-0"
+                        >
+                          {isCommentLoading ? '...' : 'Publicar'}
+                        </button>
+                      </div>
+                      {commentFeedback ? (
+                        <p className="text-[11px] text-gray-500">{commentFeedback}</p>
+                      ) : null}
+                    </form>
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
           </motion.div>
 
           <div className="px-4 py-3 border-t border-white/10 shrink-0 bg-white/[0.02]">
@@ -452,6 +647,24 @@ function InstagramPost({ project }) {
 }
 
 export default function ProjectGrid() {
+  const [engagement, setEngagement] = useState({});
+
+  useEffect(() => {
+    fetchEngagement()
+      .then(setEngagement)
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleEngagementChange = useCallback((projectId, patch) => {
+    setEngagement((prev) => ({
+      ...prev,
+      [projectId]: {
+        likes: patch.likes ?? prev[projectId]?.likes ?? 0,
+        comments: patch.comments ?? prev[projectId]?.comments ?? [],
+      },
+    }));
+  }, []);
+
   return (
     <section id="projects" className="py-24 px-6 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -488,7 +701,12 @@ export default function ProjectGrid() {
         className="space-y-10"
       >
         {PROJECTS.map((project) => (
-          <InstagramPost key={project.id} project={project} />
+          <InstagramPost
+            key={project.id}
+            project={project}
+            engagement={engagement[project.id]}
+            onEngagementChange={handleEngagementChange}
+          />
         ))}
       </motion.div>
     </section>

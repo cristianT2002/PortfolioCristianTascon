@@ -1,8 +1,57 @@
 import { motion } from 'motion/react';
 import { Mail, MessageSquare, MapPin, Send } from 'lucide-react';
+import { useState } from 'react';
 import { PROFILE } from '../constants';
 
 export default function Contact() {
+  const [isSending, setIsSending] = useState(false);
+  const [feedback, setFeedback] = useState({ type: '', message: '' });
+  const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const payload = {
+      name: form.nombre.value.trim(),
+      email: form.email.value.trim(),
+      subject: form.asunto.value.trim(),
+      message: form.mensaje.value.trim(),
+    };
+
+    setIsSending(true);
+    setFeedback({ type: '', message: '' });
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || 'No se pudo enviar el mensaje.');
+      }
+
+      setFeedback({
+        type: 'success',
+        message: 'Mensaje enviado correctamente. Te responderé pronto.',
+      });
+      form.reset();
+    } catch (error) {
+      setFeedback({
+        type: 'error',
+        message: error.message || 'Error al enviar. Intenta de nuevo en unos minutos.',
+      });
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <footer id="contact" className="py-24 px-6 max-w-7xl mx-auto">
       <motion.div
@@ -79,15 +128,7 @@ export default function Contact() {
 
           <form
             className="space-y-6 relative z-10"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const form = e.target;
-              const name = form.nombre.value;
-              const email = form.email.value;
-              const subject = form.asunto.value;
-              const body = form.mensaje.value;
-              window.location.href = `mailto:${PROFILE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\n${body}`)}`;
-            }}
+            onSubmit={handleSubmit}
           >
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -167,11 +208,20 @@ export default function Contact() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
+              disabled={isSending}
               className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 group"
             >
-              Enviar Mensaje
+              {isSending ? 'Enviando...' : 'Enviar Mensaje'}
               <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </motion.button>
+
+            {feedback.message ? (
+              <p
+                className={`text-sm ${feedback.type === 'success' ? 'text-emerald-400' : 'text-rose-400'}`}
+              >
+                {feedback.message}
+              </p>
+            ) : null}
           </form>
         </motion.div>
       </motion.div>

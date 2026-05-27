@@ -16,7 +16,7 @@ import predictiveAnalyticsImg2 from "./assets/Captura de pantalla 2026-05-26 214
 import predictiveAnalyticsImg3 from "./assets/Captura de pantalla 2026-05-26 214700.png";
 import industrialMonitoringImg1 from "./assets/Captura de pantalla 2026-05-25 203247.png";
 import industrialMonitoringImg2 from "./assets/Captura de pantalla 2026-05-25 203410.png";
-import industrialMonitoringImg3 from "./assets/Gemini_Generated_Image_y5n97jy5n97jy5n9 1.png";
+import hccViewerGraphImg from "./assets/graph.png";
 import ecopetrolLogo from "./assets/images.png";
 import geoParkLogo from "./assets/GeoPark.webp";
 import hocolLogo from "./assets/naborsLogo.png";
@@ -238,9 +238,9 @@ export const PROJECTS = [
     views: 890,
     postedAgo: "Hace 2 meses",
     images: [
+      { src: hccViewerGraphImg, fit: "cover", objectPosition: "top center", padding: "tight" },
       { src: industrialMonitoringImg1, fit: "cover", objectPosition: "top center", padding: "tight" },
       { src: industrialMonitoringImg2, fit: "cover", objectPosition: "top center", padding: "tight" },
-      industrialMonitoringImg3,
     ],
     link: "https://github.com/cristianT2002",
     github: "https://github.com/cristianT2002",
