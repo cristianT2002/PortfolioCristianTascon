@@ -30,7 +30,7 @@ export const PROJECTS = [
     company: "Axure Technologies",
     role: "Analista de Innovación y Desarrollo",
     period: "2023 — 2026",
-    client: "AX México — sector Oil & Gas",
+    client: "GeoPark, Ecopetrol y Hocol — sector Oil & Gas",
     sector: "Seguridad industrial",
     postBadge: "AI · Computer Vision",
     description:
@@ -58,11 +58,22 @@ export const PROJECTS = [
     },
     clients: [
       {
-        name: "AX México",
-        handle: "axmexico",
-        comment: "Cliente · Oil & Gas · Detección de riesgos industriales",
-        logo: axMexicoLogo,
-        logoBg: "black",
+        name: "GeoPark",
+        handle: "geopark",
+        comment: "Cliente · Oil & Gas · Gestión operativa de campo",
+        logo: geoParkLogo,
+      },
+      {
+        name: "Ecopetrol",
+        handle: "ecopetrol",
+        comment: "Cliente · Oil & Gas · Gestión operativa de campo",
+        logo: ecopetrolLogo,
+      },
+      {
+        name: "Hocol",
+        handle: "hocol",
+        comment: "Cliente · Oil & Gas · Gestión operativa de campo",
+        logo: hocolLogo,
       },
     ],
     likes: 412,
@@ -77,16 +88,16 @@ export const PROJECTS = [
         padding: "tight",
       },
     ],
-    link: "https://github.com/cristianT2002",
-    github: "https://github.com/cristianT2002",
+    link: "https://www.axuretechnologies.com/soluciones-de-hse",
+    github: true,
   },
   {
     id: "2",
     title: "AX Real Ops",
     company: "Freelancer",
-    role: "Backend · Full Stack Developer",
+    role: "Backend | Data analyst | Electronic Engineer",
     period: "2025 — 2026",
-    client: "GeoPark, Ecopetrol y Hocol — sector Oil & Gas",
+    client: "AX México — sector Oil & Gas",
     sector: "Oil & Gas",
     postBadge: "Full-Stack · Operations",
     description:
@@ -114,22 +125,11 @@ export const PROJECTS = [
     },
     clients: [
       {
-        name: "GeoPark",
-        handle: "geopark",
-        comment: "Cliente · Oil & Gas · Gestión operativa de campo",
-        logo: geoParkLogo,
-      },
-      {
-        name: "Ecopetrol",
-        handle: "ecopetrol",
-        comment: "Cliente · Oil & Gas · Gestión operativa de campo",
-        logo: ecopetrolLogo,
-      },
-      {
-        name: "Hocol",
-        handle: "hocol",
-        comment: "Cliente · Oil & Gas · Gestión operativa de campo",
-        logo: hocolLogo,
+        name: "AX México",
+        handle: "axmexico",
+        comment: "Cliente · Oil & Gas · Detección de riesgos industriales",
+        logo: axMexicoLogo,
+        logoBg: "black",
       },
     ],
     likes: 284,
@@ -143,8 +143,8 @@ export const PROJECTS = [
         padding: "tight",
       },
     ],
-    link: "https://github.com/cristianT2002",
-    github: "https://github.com/cristianT2002",
+    link: "https://axmexicoservices.com/AX_MX/auth/login",
+    github: true,
   },
   {
     id: "3",
@@ -195,8 +195,7 @@ export const PROJECTS = [
       predictiveAnalyticsImg2,
       predictiveAnalyticsImg3,
     ],
-    link: "https://github.com/cristianT2002",
-    github: "https://github.com/cristianT2002",
+    link: "https://bibliotecadigital.usb.edu.co/entities/publication/49bfa11e-7126-4d72-ab34-eb457466bff1",
   },
   {
     id: "4",
@@ -238,14 +237,16 @@ export const PROJECTS = [
     views: 890,
     postedAgo: "Hace 2 meses",
     images: [
-      { src: hccViewerGraphImg, fit: "cover", objectPosition: "top center", padding: "tight" },
+      hccViewerGraphImg,
       { src: industrialMonitoringImg1, fit: "cover", objectPosition: "top center", padding: "tight" },
       { src: industrialMonitoringImg2, fit: "cover", objectPosition: "top center", padding: "tight" },
     ],
-    link: "https://github.com/cristianT2002",
-    github: "https://github.com/cristianT2002",
+    github: true,
   },
 ];
+
+export const PRIVATE_REPO_TOOLTIP =
+  "Por términos de confidencialidad, el repositorio es privado";
 
 export const SKILLS = [
   {
@@ -358,13 +359,13 @@ export const NAV_LINKS = [
   { name: "Inicio", href: "#home", icon: Rocket },
   { name: "Experiencia", href: "#experience", icon: Cpu },
   { name: "Proyectos", href: "#projects", icon: Layers },
-  { name: "Habilidades", href: "#skills", icon: Zap },
+  { name: "Stack técnico", href: "#skills", icon: Zap },
   { name: "Contacto", href: "#contact", icon: MessageSquare },
 ];
 
 export const PROFILE = {
   name: "Cristian Tascón",
-  title: "Backend · Full Stack Developer",
+  title: "Backend Engineer | Data analyst | Electronic Engineer",
   instagramHandle: "cristian.dev",
   email: "cristiantmm11@outlook.com",
   location: "Bogotá, D.C., Colombia",

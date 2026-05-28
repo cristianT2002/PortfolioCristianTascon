@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { PROJECTS, PROFILE } from '../constants';
+import { PRIVATE_REPO_TOOLTIP, PROJECTS, PROFILE } from '../constants';
+import { GitHubIcon } from './SocialIcons';
 import { fetchEngagement, postProjectComment, toggleProjectLike } from '../api';
 import profileImg from '../assets/FotoPerfil.png';
 import {
@@ -8,7 +9,6 @@ import {
   Bookmark,
   ChevronLeft,
   ChevronRight,
-  Code2,
   ExternalLink,
   Heart,
   Layers,
@@ -344,26 +344,36 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
               </div>
             </motion.div>
             <div className="flex items-center gap-1 shrink-0">
-              <motion.a
-                whileHover={{ scale: 1.08 }}
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
-                aria-label="Ver en GitHub"
-              >
-                <Code2 className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.08 }}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
-                aria-label="Ver proyecto"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </motion.a>
+              {project.github && (
+                <div className="relative group">
+                  <motion.button
+                    type="button"
+                    whileHover={{ scale: 1.08 }}
+                    className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors cursor-default"
+                    aria-label={PRIVATE_REPO_TOOLTIP}
+                  >
+                    <GitHubIcon className="w-5 h-5" />
+                  </motion.button>
+                  <span
+                    role="tooltip"
+                    className="pointer-events-none absolute right-0 top-full z-20 mt-1.5 w-52 rounded-lg border border-white/10 bg-[#1a1a1a] px-3 py-2 text-center text-[11px] leading-snug text-gray-200 opacity-0 shadow-xl transition-opacity duration-200 group-hover:opacity-100"
+                  >
+                    {PRIVATE_REPO_TOOLTIP}
+                  </span>
+                </div>
+              )}
+              {project.link && (
+                <motion.a
+                  whileHover={{ scale: 1.08 }}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
+                  aria-label="Ver proyecto"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                </motion.a>
+              )}
             </div>
           </div>
 
@@ -677,7 +687,7 @@ export default function ProjectGrid() {
             <Layers className="w-3.5 h-3.5" />
             Feed de proyectos
           </div>
-          <h2 className="text-4xl font-bold mb-4">Proyectos realizados</h2>
+          <h2 className="text-4xl font-bold mb-4">Proyectos</h2>
         </motion.div>
         <motion.a
           href={PROFILE.github}
@@ -686,7 +696,6 @@ export default function ProjectGrid() {
           whileHover={{ x: 5 }}
           className="text-blue-400 font-medium flex items-center gap-2 hover:text-blue-300 transition-colors shrink-0"
         >
-          Ver todo en GitHub <ExternalLink className="w-4 h-4" />
         </motion.a>
       </div>
 

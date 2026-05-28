@@ -22,7 +22,7 @@ export default function Experience() {
         </div>
         <h2 className="text-4xl font-bold mb-4">¿Dónde he construido impacto?</h2>
         <p className="text-gray-400 max-w-2xl leading-relaxed">
-          Más de 3 años pasando de prácticas a features en producción. Este es el hilo de mi recorrido;
+          Más de 3 años de experiencia en el desarrollo de software. Este es el hilo de mi recorrido;
           el detalle técnico y el impacto están en cada proyecto.
         </p>
       </motion.div>

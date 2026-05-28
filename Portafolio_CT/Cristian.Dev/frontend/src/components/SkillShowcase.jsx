@@ -51,12 +51,10 @@ export default function SkillShowcase() {
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="mb-12 flex flex-col items-center gap-4 text-center md:mb-16">
           <h2 className="max-w-3xl text-3xl font-normal tracking-tight text-[#b6b5b9] md:text-5xl md:leading-tight md:tracking-[-0.02em]">
-            Herramientas y tecnologías que utilizo para{' '}
-            <span className="text-white">dar vida a proyectos innovadores</span>
+            Stack técnico{' '}
           </h2>
           <p className="max-w-xl text-base leading-6 text-[#d1cece]">
-            Backend, frontend, datos, infraestructura e IA aplicada a productos
-            reales.
+            Backend, frontend, datos, infraestructura e Inteligencia Artificial.
           </p>
         </div>
 

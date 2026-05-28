@@ -115,9 +115,7 @@ export default function Hero() {
                   aria-label={label}
                   title={label}
                 >
-                  <Icon
-                    className={label === "GitLab" ? "w-8 h-8" : "w-6 h-6"}
-                  />
+                  <Icon className="w-6 h-6" />
                 </motion.a>
               ))}
             </motion.div>
@@ -138,14 +136,15 @@ export default function Hero() {
             <img
               src={profileImg}
               alt={PROFILE.name}
-              className="w-full h-full object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)] transition-transform duration-700 group-hover:scale-105"
+              className="h-full w-full object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)] transition-transform duration-700 group-hover:scale-105"
+              style={{ objectPosition: "58% bottom" }}
             />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="mt-4 text-center lg:text-left"
+            className="mt-4 w-64 md:w-80 text-center"
           >
             <p className="text-white font-bold text-xl">{PROFILE.name}</p>
             <p className="text-blue-400 text-sm font-medium">{PROFILE.title}</p>
