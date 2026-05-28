@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { NAV_LINKS } from '../constants';
-import { Terminal } from 'lucide-react';
 import logo from '../assets/CLogo.png';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   return (
@@ -23,7 +23,7 @@ export default function Navbar() {
             <li key={link.name}>
               <a
                 href={link.href}
-                className="px-4 py-2 rounded-full text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
+                className="px-4 py-2 rounded-full text-sm font-medium text-theme-muted hover:text-theme-text hover:bg-theme-hover-bg transition-all duration-300 flex items-center gap-2"
               >
                 <link.icon className="w-4 h-4 sm:hidden" />
                 <span className="hidden sm:block">{link.name}</span>
@@ -32,14 +32,18 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <motion.div whileHover={{ scale: 1.05 }} className="hidden md:block">
-          <a
-            href="#contact"
-            className="bg-white text-black px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-500 hover:text-white transition-all duration-300 inline-block"
-          >
-            Contáctame
-          </a>
-        </motion.div>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <a
+              href="#contact"
+              className="bg-theme-text text-theme-bg px-4 md:px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-500 hover:text-white transition-all duration-300 inline-block"
+            >
+              <span className="hidden md:inline">Contáctame</span>
+              <span className="md:hidden">Contacto</span>
+            </a>
+          </motion.div>
+        </div>
       </nav>
     </motion.header>
   );

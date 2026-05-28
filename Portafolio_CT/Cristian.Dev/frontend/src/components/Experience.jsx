@@ -21,14 +21,14 @@ export default function Experience() {
           Experiencia
         </div>
         <h2 className="text-4xl font-bold mb-4">¿Dónde he construido impacto?</h2>
-        <p className="text-gray-400 max-w-2xl leading-relaxed">
+        <p className="text-theme-muted max-w-2xl leading-relaxed">
           Más de 3 años de experiencia en el desarrollo de software. Este es el hilo de mi recorrido;
           el detalle técnico y el impacto están en cada proyecto.
         </p>
       </motion.div>
 
       <div className="max-w-3xl mx-auto relative">
-        <motion.div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-500/50 via-white/10 to-transparent" />
+        <motion.div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-500/50 via-theme-border to-transparent" />
 
         <motion.div
           initial="hidden"
@@ -63,7 +63,7 @@ export default function Experience() {
                   <div>
                     <h3 className="text-2xl font-bold">{org.company}</h3>
                     {org.location && (
-                      <p className="text-xs text-gray-500 mt-0.5">{org.location}</p>
+                      <p className="text-xs text-theme-text-subtle mt-0.5">{org.location}</p>
                     )}
                   </div>
                   <span className="text-xs font-bold text-blue-400 uppercase tracking-widest">
@@ -71,7 +71,7 @@ export default function Experience() {
                   </span>
                 </motion.div>
 
-                <p className="text-gray-400 text-sm leading-relaxed mb-6">{org.summary}</p>
+                <p className="text-theme-muted text-sm leading-relaxed mb-6">{org.summary}</p>
 
                 <div className="space-y-4">
                   {org.roles.map((role) => {
@@ -82,7 +82,7 @@ export default function Experience() {
                     return (
                       <div
                         key={`${org.id}-${role.title}`}
-                        className="rounded-2xl bg-white/[0.02] border border-white/5 p-5"
+                        className="rounded-2xl bg-theme-panel-bg border border-theme-border-subtle p-5"
                       >
                         <motion.div
                           initial={{ opacity: 0 }}
@@ -90,14 +90,27 @@ export default function Experience() {
                           viewport={{ once: true }}
                           className="flex flex-wrap items-center justify-between gap-2 mb-3"
                         >
-                          <p className="font-semibold text-white">{role.title}</p>
-                          <span className="text-xs text-gray-500 font-medium">{role.period}</span>
+                          <p className="font-semibold text-theme-text">{role.title}</p>
+                          <span className="text-xs text-theme-muted font-medium">{role.period}</span>
                         </motion.div>
 
-                        {role.narrative && (
-                          <p className="text-xs text-gray-500 leading-relaxed mb-3">
-                            {role.narrative}
-                          </p>
+                        {role.items?.length > 0 ? (
+                          <ul className="space-y-2 mb-4 list-none">
+                            {role.items.map((item) => (
+                              <li
+                                key={item}
+                                className="text-sm text-theme-muted leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.5rem] before:w-1.5 before:h-1.5 before:rounded-full before:bg-blue-500/70"
+                              >
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          role.narrative && (
+                            <p className="text-sm text-theme-muted leading-relaxed mb-3">
+                              {role.narrative}
+                            </p>
+                          )
                         )}
 
                         {linkedProjects.length > 0 && (
@@ -108,7 +121,7 @@ export default function Experience() {
                                 type="button"
                                 whileHover={{ scale: 1.02 }}
                                 onClick={() => scrollToProject(project.id)}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-medium hover:bg-blue-500/20 transition-colors cursor-pointer"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-700 dark:text-blue-300 text-xs font-medium hover:bg-blue-500/20 transition-colors cursor-pointer"
                               >
                                 {project.title}
                                 <ArrowUpRight className="w-3 h-3" />

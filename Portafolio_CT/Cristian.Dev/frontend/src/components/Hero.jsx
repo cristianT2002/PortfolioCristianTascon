@@ -75,7 +75,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto lg:mx-0"
+            className="text-xl text-theme-muted mb-12 max-w-2xl mx-auto lg:mx-0"
           >
             {PROFILE.bio}
           </motion.p>
@@ -111,7 +111,7 @@ export default function Hero() {
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="group w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all text-gray-400 hover:text-white"
+                  className="group w-14 h-14 rounded-2xl border border-theme-border flex items-center justify-center hover:bg-theme-hover-bg transition-all text-theme-muted hover:text-theme-text"
                   aria-label={label}
                   title={label}
                 >
@@ -146,7 +146,7 @@ export default function Hero() {
             transition={{ delay: 0.6 }}
             className="mt-4 w-64 md:w-80 text-center"
           >
-            <p className="text-white font-bold text-xl">{PROFILE.name}</p>
+            <p className="text-theme-text font-bold text-xl">{PROFILE.name}</p>
             <p className="text-blue-400 text-sm font-medium">{PROFILE.title}</p>
           </motion.div>
         </motion.div>

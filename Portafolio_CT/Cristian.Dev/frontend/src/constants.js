@@ -28,7 +28,7 @@ export const PROJECTS = [
     id: "1",
     title: "HSE Video Analytics",
     company: "Axure Technologies",
-    role: "Analista de Innovación y Desarrollo",
+    role: "Analista de Innovación y Desarrollo | Backend Engineer",
     period: "2023 — 2026",
     client: "GeoPark, Ecopetrol y Hocol — sector Oil & Gas",
     sector: "Seguridad industrial",
@@ -39,7 +39,7 @@ export const PROJECTS = [
     highlights: [
       "Menor riesgo en mesa rotaria, planchada y contrapozo con monitoreo continuo",
       "Avisos cuando falta EPP o hay conductas fuera de protocolo",
-      "Detección, notificación y visualización desacopladas para escalar sin fricción",
+      "Arquitectura optimizada para integrar detección, alertas y visualización en tiempo real",
     ],
     challenges: [
       "Ampliar y afinar el dataset de entrenamiento del modelo",
@@ -201,7 +201,7 @@ export const PROJECTS = [
     id: "4",
     title: "HCC Viewer",
     company: "Axure Technologies",
-    role: "Frontend Developer · ML",
+    role: "Analista de Innovación y Desarrollo | Backend Engineer",
     period: "2025 — Presente",
     client: "Proyecto interno — Axure Technologies",
     clientsSectionTitle: "Contexto del proyecto",
@@ -280,25 +280,30 @@ export const SKILLS = [
 
 /** Logos para el carrusel de tech stack (Simple Icons CDN) */
 export const TECH_STACK = [
-  { name: "Python", slug: "python", color: "3776AB" },
-  { name: "FastAPI", slug: "fastapi", color: "009688" },
-  { name: "Flask", slug: "flask", color: "FFFFFF" },
-  { name: "Node.js", slug: "nodedotjs", color: "339933" },
-  { name: "React", slug: "react", color: "61DAFB" },
-  { name: "JavaScript", slug: "javascript", color: "F7DF1E" },
-  { name: "TypeScript", slug: "typescript", color: "3178C6" },
-  { name: "Tailwind CSS", slug: "tailwindcss", color: "06B6D4" },
-  { name: "Redux", slug: "redux", color: "764ABC" },
-  { name: "PostgreSQL", slug: "postgresql", color: "4169E1" },
-  { name: "Docker", slug: "docker", color: "2496ED" },
-  { name: "AWS", slug: "amazonaws", color: "FF9900" },
-  { name: "Kubernetes", slug: "kubernetes", color: "326CE5" },
-  { name: "Grafana", slug: "grafana", color: "F46800" },
-  { name: "Prometheus", slug: "prometheus", color: "E6522C" },
-  { name: "OpenCV", slug: "opencv", color: "5C3EE8" },
-  { name: "scikit-learn", slug: "scikitlearn", color: "F7931E" },
-  { name: "PyTorch", slug: "pytorch", color: "EE4C2C" },
-  { name: "Apache Kafka", slug: "apachekafka", color: "FFFFFF" },
+  { name: "Python", slug: "python", color: "3776AB", url: "https://www.python.org/" },
+  { name: "FastAPI", slug: "fastapi", color: "009688", url: "https://fastapi.tiangolo.com/" },
+  { name: "Flask", slug: "flask", color: "FFFFFF", url: "https://flask.palletsprojects.com/" },
+  { name: "Node.js", slug: "nodedotjs", color: "339933", url: "https://nodejs.org/" },
+  { name: "React", slug: "react", color: "61DAFB", url: "https://react.dev/" },
+  {
+    name: "JavaScript",
+    slug: "javascript",
+    color: "F7DF1E",
+    url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+  },
+  { name: "TypeScript", slug: "typescript", color: "3178C6", url: "https://www.typescriptlang.org/" },
+  { name: "Tailwind CSS", slug: "tailwindcss", color: "06B6D4", url: "https://tailwindcss.com/" },
+  { name: "Redux", slug: "redux", color: "764ABC", url: "https://redux.js.org/" },
+  { name: "PostgreSQL", slug: "postgresql", color: "4169E1", url: "https://www.postgresql.org/" },
+  { name: "Docker", slug: "docker", color: "2496ED", url: "https://www.docker.com/" },
+  { name: "AWS", slug: "amazonaws", color: "FF9900", url: "https://aws.amazon.com/" },
+  { name: "Kubernetes", slug: "kubernetes", color: "326CE5", url: "https://kubernetes.io/" },
+  { name: "Grafana", slug: "grafana", color: "F46800", url: "https://grafana.com/" },
+  { name: "Prometheus", slug: "prometheus", color: "E6522C", url: "https://prometheus.io/" },
+  { name: "OpenCV", slug: "opencv", color: "5C3EE8", url: "https://opencv.org/" },
+  { name: "scikit-learn", slug: "scikitlearn", color: "F7931E", url: "https://scikit-learn.org/" },
+  { name: "PyTorch", slug: "pytorch", color: "EE4C2C", url: "https://pytorch.org/" },
+  { name: "Apache Kafka", slug: "apachekafka", color: "FFFFFF", url: "https://kafka.apache.org/" },
 ];
 
 export const TECH_STACK_ROW_1 = TECH_STACK.slice(0, 10);
@@ -311,27 +316,23 @@ export const CAREER = [
     location: "Bogotá, Colombia",
     period: "DIC 2022 — Presente",
     summary:
-      "De prácticas a productos en producción para Oil & Gas y telecom: visión por computadora en tiempo real, arquitecturas event-driven, APIs con FastAPI y modelos predictivos con impacto en costos operativos.",
+      "En Axure Technologies inicié como practicante de Ingeniería Electrónica, integrando módulos en Python. Luego evolucioné al rol de Analista de Investigación y Desarrollo / Backend Engineer, desarrollando APIs, sistemas robustos con Python y FastAPI, soluciones de Machine Learning, Deep Learning y visión artificial, además de integraciones frontend-backend para clientes del sector hidrocarburos.",
     roles: [
       {
-        title: "Frontend Developer",
-        period: "2025 — Presente",
-        narrative:
-          "HCC Viewer: consumo satelital, predicción de agotamiento y dashboard React con respuesta más rápida para el equipo.",
-        projectIds: ["4"],
-      },
-      {
-        title: "Analista de Innovación y Desarrollo / Backend Engineer",
-        period: "JUL 2023 — 2025",
-        narrative:
-          "HSE Video Analytics: YOLO en GPU, alertas por WhatsApp y clean architecture; 50 % menos memoria y 85 %+ de precisión en campo.",
-        projectIds: ["1"],
+        title: "Analista de Innovación y Desarrollo | Backend Engineer",
+        period: "JUL 2023 — Presente",
+        items: [
+          "HSE Video Analytics: sistema de visión artificial con YOLO y FastAPI, optimizado para reducir 50 % el consumo de memoria y lograr 85 %+ de precisión en campo.",
+          "HCC Viewer: modelos predictivos (scikit-learn, TensorFlow) e integración PRTG para estimar agotamiento de consumo satelital; 96 % menos costos por sobreconsumo.",
+        ],
+        projectIds: ["1", "4"],
       },
       {
         title: "Software Engineering Intern",
         period: "DIC 2022 — JUN 2023",
-        narrative:
-          "Módulos de visión por computadora y primeros microservicios bajo metodología ágil.",
+        items: [
+          "Módulos en Python para focus stacking en un sistema de categorización y visualización de minerales.",
+        ],
         projectIds: [],
       },
     ],
@@ -340,15 +341,17 @@ export const CAREER = [
     id: "freelance",
     company: "Freelance",
     location: "Colombia · Remoto",
-    period: "OCT 2025 — MAR 2026",
+    period: "OCT 2025 — ABR 2026",
     summary:
       "Part-time en AX Real Ops: PostgreSQL multi-schema, APIs FastAPI y automatización para operaciones de campo en Oil & Gas.",
     roles: [
       {
-        title: "Backend · Full Stack Developer",
-        period: "OCT 2025 — MAR 2026",
-        narrative:
-          "Plataforma full-stack con mapas, reportes, 2FA y despliegue seguro; menos trabajo manual y consultas más rápidas.",
+        title: "Backend | Full Stack Developer",
+        period: "OCT 2025 — ABR 2026",
+        items: [
+          "AX Real Ops: API REST en FastAPI y PostgreSQL multi-schema con React, mapas Leaflet, dashboards y exportación de reportes para operaciones de campo.",
+          "Automatización de cargas masivas y tareas repetitivas; 40 % menos esfuerzo manual y consultas optimizadas con sesiones, 2FA y despliegue HTTPS.",
+        ],
         projectIds: ["2"],
       },
     ],

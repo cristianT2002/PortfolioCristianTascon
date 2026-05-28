@@ -22,7 +22,7 @@ export function GitLabIcon({ className }) {
       src={gitlabLogo}
       alt=""
       aria-hidden="true"
-      className={`${className} object-contain mix-blend-lighten opacity-90 group-hover:opacity-100 transition-opacity`}
+      className={`${className} object-contain opacity-90 group-hover:opacity-100 transition-opacity dark:mix-blend-lighten`}
     />
   );
 }

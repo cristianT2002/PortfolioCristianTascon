@@ -3,6 +3,9 @@ import { Mail, MessageSquare, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 import { PROFILE } from '../constants';
 
+const inputClassName =
+  'w-full bg-theme-input-bg border border-theme-border rounded-2xl px-5 py-3 text-theme-text placeholder:text-theme-text-subtle focus:outline-none focus:border-blue-500/50 transition-colors';
+
 export default function Contact() {
   const [isSending, setIsSending] = useState(false);
   const [feedback, setFeedback] = useState({ type: '', message: '' });
@@ -61,10 +64,11 @@ export default function Contact() {
         className="grid grid-cols-1 lg:grid-cols-2 gap-16"
       >
         <div>
-          <h2 className="text-4xl font-bold mb-6">¿Tienes un proyecto en mente?</h2>
-          <p className="text-gray-400 text-lg mb-12">
-            Estoy abierto a colaborar en proyectos interesantes y desafiantes. Escríbeme y
-            construyamos algo con impacto medible.
+          <h2 className="text-4xl font-bold mb-6">Creando tecnología con impacto</h2>
+          <p className="text-theme-muted text-lg mb-12">
+            Me interesa conectar con equipos y organizaciones que trabajen en soluciones
+            tecnológicas retadoras, especialmente en backend, integración de sistemas, visión
+            artificial e IA aplicada.
           </p>
 
           <div className="space-y-6">
@@ -77,8 +81,8 @@ export default function Contact() {
                 <Mail className="w-5 h-5 text-blue-400" />
               </div>
               <motion.div initial={{ opacity: 0.8 }} whileHover={{ opacity: 1 }}>
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Email</p>
-                <p className="text-white font-medium">{PROFILE.email}</p>
+                <p className="text-xs font-bold text-theme-text-subtle uppercase tracking-widest">Email</p>
+                <p className="text-theme-text font-medium">{PROFILE.email}</p>
               </motion.div>
             </motion.a>
 
@@ -97,10 +101,10 @@ export default function Contact() {
                 <MessageSquare className="w-5 h-5 text-emerald-400" />
               </motion.div>
               <div>
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                <p className="text-xs font-bold text-theme-text-subtle uppercase tracking-widest">
                   LinkedIn
                 </p>
-                <p className="text-white font-medium">linkedin.com/in/cristiantasconm</p>
+                <p className="text-theme-text font-medium">linkedin.com/in/cristiantasconm</p>
               </div>
             </motion.a>
 
@@ -109,10 +113,10 @@ export default function Contact() {
                 <MapPin className="w-5 h-5 text-rose-400" />
               </div>
               <div>
-                <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                <p className="text-xs font-bold text-theme-text-subtle uppercase tracking-widest">
                   Ubicación
                 </p>
-                <p className="text-white font-medium">{PROFILE.location} | Remoto</p>
+                <p className="text-theme-text font-medium">{PROFILE.location} | Remoto</p>
               </div>
             </motion.div>
           </div>
@@ -126,10 +130,7 @@ export default function Contact() {
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
 
-          <form
-            className="space-y-6 relative z-10"
-            onSubmit={handleSubmit}
-          >
+          <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +140,7 @@ export default function Contact() {
               <motion.div whileFocus={{ scale: 1.01 }} className="space-y-2">
                 <label
                   htmlFor="nombre"
-                  className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1"
+                  className="text-xs font-bold uppercase tracking-wider text-theme-text-subtle ml-1"
                 >
                   Nombre
                 </label>
@@ -149,13 +150,13 @@ export default function Contact() {
                   type="text"
                   placeholder="Tu nombre"
                   required
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3 focus:outline-none focus:border-blue-500/50 transition-colors"
+                  className={inputClassName}
                 />
               </motion.div>
               <motion.div whileFocus={{ scale: 1.01 }} className="space-y-2">
                 <label
                   htmlFor="email"
-                  className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1"
+                  className="text-xs font-bold uppercase tracking-wider text-theme-text-subtle ml-1"
                 >
                   Email
                 </label>
@@ -165,7 +166,7 @@ export default function Contact() {
                   type="email"
                   placeholder="tu@email.com"
                   required
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3 focus:outline-none focus:border-blue-500/50 transition-colors"
+                  className={inputClassName}
                 />
               </motion.div>
             </motion.div>
@@ -173,7 +174,7 @@ export default function Contact() {
             <motion.div whileFocus={{ scale: 1.01 }} className="space-y-2">
               <label
                 htmlFor="asunto"
-                className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1"
+                className="text-xs font-bold uppercase tracking-wider text-theme-text-subtle ml-1"
               >
                 Asunto
               </label>
@@ -181,16 +182,16 @@ export default function Contact() {
                 id="asunto"
                 name="asunto"
                 type="text"
-                placeholder="Colaboración / Freelance"
+                placeholder="Oportunidad laboral / Proceso de selección"
                 required
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3 focus:outline-none focus:border-blue-500/50 transition-colors"
+                className={inputClassName}
               />
             </motion.div>
 
             <motion.div whileFocus={{ scale: 1.01 }} className="space-y-2">
               <label
                 htmlFor="mensaje"
-                className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1"
+                className="text-xs font-bold uppercase tracking-wider text-theme-text-subtle ml-1"
               >
                 Mensaje
               </label>
@@ -198,9 +199,9 @@ export default function Contact() {
                 id="mensaje"
                 name="mensaje"
                 rows={4}
-                placeholder="Cuéntame sobre tu proyecto..."
+                placeholder="Cuéntame sobre la vacante o el proceso..."
                 required
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
+                className={`${inputClassName} resize-none`}
               />
             </motion.div>
 
@@ -211,7 +212,7 @@ export default function Contact() {
               disabled={isSending}
               className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 group"
             >
-              {isSending ? 'Enviando...' : 'Enviar Mensaje'}
+              {isSending ? 'Enviando...' : 'Contactarme'}
               <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </motion.button>
 
@@ -226,22 +227,22 @@ export default function Contact() {
         </motion.div>
       </motion.div>
 
-      <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p className="text-gray-500 text-sm italic">
+      <div className="mt-24 pt-8 border-t border-theme-border-subtle flex flex-col md:flex-row items-center justify-between gap-6">
+        <p className="text-theme-text-subtle text-sm italic">
           &copy; {new Date().getFullYear()} Cristian.Dev. Ingeniero Electrónico · USB Bogotá 2024.
         </p>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex items-center gap-6 text-xs font-bold text-gray-500 uppercase tracking-widest"
+          className="flex items-center gap-6 text-xs font-bold text-theme-text-subtle uppercase tracking-widest"
         >
           <motion.a
             whileHover={{ y: -2 }}
             href={PROFILE.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors"
+            className="hover:text-theme-text transition-colors"
           >
             GitHub
           </motion.a>
@@ -250,7 +251,7 @@ export default function Contact() {
             href={PROFILE.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors"
+            className="hover:text-theme-text transition-colors"
           >
             LinkedIn
           </motion.a>

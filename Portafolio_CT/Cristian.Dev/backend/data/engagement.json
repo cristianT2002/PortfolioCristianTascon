@@ -12,7 +12,14 @@
     "comments": []
   },
   "4": {
-    "likes": 198,
-    "comments": []
+    "likes": 199,
+    "comments": [
+      {
+        "id": "fde148e8-7e96-4a5e-8cf0-2176825125b6",
+        "author": "crisrian",
+        "text": "me encanto tu proyecto",
+        "createdAt": "2026-05-28T15:29:46.127Z"
+      }
+    ]
   }
 }

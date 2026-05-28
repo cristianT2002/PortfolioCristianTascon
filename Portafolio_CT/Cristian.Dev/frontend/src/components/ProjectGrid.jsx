@@ -61,8 +61,8 @@ function ClientAvatar({ client, size = 'md' }) {
         alt={client.name}
         className={`${sizeClass} object-contain shrink-0 ${
           isDarkLogo
-            ? 'rounded-full bg-black p-1 border border-white/15'
-            : 'rounded-2xl bg-white p-0.5 border border-white/10'
+            ? 'rounded-full bg-black p-1 border border-theme-border'
+            : 'rounded-2xl bg-white p-0.5 border border-theme-border'
         }`}
       />
     );
@@ -77,7 +77,7 @@ function ClientAvatar({ client, size = 'md' }) {
 
   return (
     <motion.div
-      className={`${sizeClass} rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center font-bold text-white border border-white/10 shrink-0`}
+      className={`${sizeClass} rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center font-bold text-white border border-theme-border shrink-0`}
       aria-hidden
     >
       {initials}
@@ -109,11 +109,11 @@ function PostImageCarousel({ images, title, postBadge }) {
   }, [active, count]);
 
   if (count === 0) {
-    return <div className="absolute inset-0 bg-[#111]" aria-hidden />;
+    return <div className="absolute inset-0 bg-theme-surface-muted" aria-hidden />;
   }
 
   return (
-    <motion.div className="absolute inset-0 bg-black">
+    <motion.div className="absolute inset-0 bg-theme-carousel-bg">
       <div
         ref={scrollRef}
         onScroll={onScroll}
@@ -123,7 +123,7 @@ function PostImageCarousel({ images, title, postBadge }) {
         {images.map((image, index) => (
           <div
             key={`${image.src}-${index}`}
-            className={`relative flex h-full w-full shrink-0 snap-center snap-always items-center justify-center overflow-hidden bg-[#0a0a0a] ${IMAGE_PADDING[image.padding] ?? IMAGE_PADDING.default}`}
+            className={`relative flex h-full w-full shrink-0 snap-center snap-always items-center justify-center overflow-hidden bg-theme-carousel-slide ${IMAGE_PADDING[image.padding] ?? IMAGE_PADDING.default}`}
           >
             <img
               src={image.src}
@@ -140,7 +140,9 @@ function PostImageCarousel({ images, title, postBadge }) {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/15 pointer-events-none" />
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-[var(--theme-overlay-from)] via-transparent to-[var(--theme-overlay-to)] pointer-events-none"
+      />
 
       <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass text-[11px] font-bold text-emerald-300 border border-emerald-500/30 pointer-events-none">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -154,7 +156,7 @@ function PostImageCarousel({ images, title, postBadge }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollTo(active - 1)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full glass flex items-center justify-center text-white/90 hover:text-white opacity-0 group-hover/carousel:opacity-100 sm:opacity-100 transition-opacity"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full glass flex items-center justify-center text-theme-icon-on-media hover:text-theme-text opacity-0 group-hover/carousel:opacity-100 sm:opacity-100 transition-opacity"
             aria-label="Imagen anterior"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -164,7 +166,7 @@ function PostImageCarousel({ images, title, postBadge }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollTo(active + 1)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full glass flex items-center justify-center text-white/90 hover:text-white opacity-0 group-hover/carousel:opacity-100 sm:opacity-100 transition-opacity"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full glass flex items-center justify-center text-theme-icon-on-media hover:text-theme-text opacity-0 group-hover/carousel:opacity-100 sm:opacity-100 transition-opacity"
             aria-label="Imagen siguiente"
           >
             <ChevronRight className="w-5 h-5" />
@@ -175,7 +177,9 @@ function PostImageCarousel({ images, title, postBadge }) {
               <span
                 key={index}
                 className={`h-1.5 rounded-full transition-all ${
-                  index === active ? 'w-5 bg-white' : 'w-1.5 bg-white/40'
+                  index === active
+                    ? 'w-5 bg-[var(--theme-carousel-dot)]'
+                    : 'w-1.5 bg-[var(--theme-carousel-dot-inactive)]'
                 }`}
               />
             ))}
@@ -231,6 +235,7 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
 
   const [isLiked, setIsLiked] = useState(() => getStoredLikes().includes(project.id));
   const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [isClientsOpen, setIsClientsOpen] = useState(true);
   const [isLikeLoading, setIsLikeLoading] = useState(false);
   const [commentAuthor, setCommentAuthor] = useState('');
   const [commentText, setCommentText] = useState('');
@@ -264,6 +269,22 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
   const openComments = () => {
     setIsCommentsOpen(true);
     setTimeout(() => commentInputRef.current?.focus(), 120);
+  };
+
+  const closeComments = () => {
+    setIsCommentsOpen(false);
+  };
+
+  const toggleComments = () => {
+    if (isCommentsOpen) {
+      closeComments();
+    } else {
+      openComments();
+    }
+  };
+
+  const toggleClients = () => {
+    setIsClientsOpen((open) => !open);
   };
 
   const handleSubmitComment = async (event) => {
@@ -304,11 +325,11 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
         hidden: { opacity: 0, y: 36 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
       }}
-      className="w-full glass rounded-[2rem] overflow-hidden scroll-mt-28 border border-white/10 shadow-2xl shadow-black/40"
+      className="w-full glass rounded-[2rem] overflow-hidden scroll-mt-28 border border-theme-border shadow-2xl shadow-[var(--theme-shadow)]"
     >
       <motion.div
         whileHover={{ y: -2 }}
-        className="grid lg:grid-cols-2 lg:min-h-[min(640px,78vh)] bg-[#0a0a0a]"
+        className="grid lg:grid-cols-2 lg:min-h-[min(640px,78vh)] bg-theme-surface"
       >
         {/* Carrusel a ancho completo de la columna */}
         <div className="relative w-full aspect-square lg:aspect-auto lg:min-h-[min(640px,78vh)] group/carousel">
@@ -320,8 +341,8 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
         </div>
 
         {/* Panel estilo Instagram */}
-        <div className="flex flex-col min-h-[420px] lg:min-h-0 lg:max-h-[min(640px,78vh)] border-t lg:border-t-0 lg:border-l border-white/10">
-          <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10 shrink-0">
+        <div className="flex flex-col min-h-[420px] lg:min-h-0 lg:max-h-[min(640px,78vh)] border-t lg:border-t-0 lg:border-l border-theme-border">
+          <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-theme-border shrink-0">
             <motion.div
               initial={{ opacity: 0, x: -8 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -338,7 +359,7 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                   {handle}
                   <BadgeCheck className="w-4 h-4 text-blue-400 shrink-0" aria-label="Verificado" />
                 </p>
-                <p className="text-[11px] text-gray-500 truncate">
+                <p className="text-[11px] text-theme-text-subtle truncate">
                   {PROFILE.location} · {project.role}
                 </p>
               </div>
@@ -349,14 +370,14 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                   <motion.button
                     type="button"
                     whileHover={{ scale: 1.08 }}
-                    className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors cursor-default"
+                    className="p-2 rounded-lg hover:bg-theme-hover-bg text-theme-muted hover:text-theme-text transition-colors cursor-default"
                     aria-label={PRIVATE_REPO_TOOLTIP}
                   >
                     <GitHubIcon className="w-5 h-5" />
                   </motion.button>
                   <span
                     role="tooltip"
-                    className="pointer-events-none absolute right-0 top-full z-20 mt-1.5 w-52 rounded-lg border border-white/10 bg-[#1a1a1a] px-3 py-2 text-center text-[11px] leading-snug text-gray-200 opacity-0 shadow-xl transition-opacity duration-200 group-hover:opacity-100"
+                    className="pointer-events-none absolute right-0 top-full z-20 mt-1.5 w-52 rounded-lg border border-theme-border bg-theme-surface-elevated px-3 py-2 text-center text-[11px] leading-snug text-theme-text-secondary opacity-0 shadow-xl transition-opacity duration-200 group-hover:opacity-100"
                   >
                     {PRIVATE_REPO_TOOLTIP}
                   </span>
@@ -368,7 +389,7 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
+                  className="p-2 rounded-lg hover:bg-theme-hover-bg text-theme-muted hover:text-theme-text transition-colors"
                   aria-label="Ver proyecto"
                 >
                   <ExternalLink className="w-5 h-5" />
@@ -379,8 +400,8 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
 
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 scrollbar-hide">
             <div className="text-sm leading-relaxed">
-              <p className="text-gray-200">
-                <strong className="text-white">{project.title}</strong>
+              <p className="text-theme-text-secondary">
+                <strong className="text-theme-text">{project.title}</strong>
                 {' — '}
                 {project.description}
               </p>
@@ -389,16 +410,16 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
               </p>
             </div>
 
-            <div className="rounded-2xl bg-white/[0.03] border border-white/8 p-4 space-y-4">
+            <div className="rounded-2xl bg-theme-panel-bg border border-theme-border-subtle p-4 space-y-4">
               <div className="space-y-2">
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                <p className="text-[10px] font-bold text-theme-text-subtle uppercase tracking-widest">
                   Tecnologías
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/25 text-[11px] font-medium text-blue-200"
+                      className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/25 text-[11px] font-medium text-blue-700 dark:text-blue-200"
                     >
                       {tech}
                     </span>
@@ -406,13 +427,13 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                 </div>
               </div>
 
-              <div className="space-y-2 pt-1 border-t border-white/5">
-                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+              <div className="space-y-2 pt-1 border-t border-theme-border-subtle">
+                <p className="text-[10px] font-bold text-theme-text-subtle uppercase tracking-widest">
                   Logros
                 </p>
                 <ul className="space-y-1.5">
                   {project.highlights.map((item) => (
-                    <li key={item} className="flex gap-2 text-xs text-gray-400 leading-relaxed">
+                    <li key={item} className="flex gap-2 text-xs text-theme-muted leading-relaxed">
                       <span className="text-emerald-400 shrink-0 mt-0.5">•</span>
                       {item}
                     </li>
@@ -422,23 +443,23 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                   {project.achievements.map((item) => (
                     <div
                       key={item.label}
-                      className="flex-1 min-w-0 rounded-xl bg-white/[0.04] border border-white/10 px-2 py-2 text-center"
+                      className="flex-1 min-w-0 rounded-xl bg-theme-panel-bg-hover border border-theme-border px-2 py-2 text-center"
                     >
                       <p className="text-sm font-bold text-blue-300 truncate">{item.value}</p>
-                      <p className="text-[9px] text-gray-500 leading-tight line-clamp-2">{item.label}</p>
+                      <p className="text-[9px] text-theme-text-subtle leading-tight line-clamp-2">{item.label}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               {project.challenges?.length > 0 && (
-                <div className="space-y-2 pt-1 border-t border-white/5">
-                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                <div className="space-y-2 pt-1 border-t border-theme-border-subtle">
+                  <p className="text-[10px] font-bold text-theme-text-subtle uppercase tracking-widest">
                     Retos superados
                   </p>
                   <ul className="space-y-1.5">
                     {project.challenges.map((item) => (
-                      <li key={item} className="flex gap-2 text-xs text-gray-500 leading-relaxed">
+                      <li key={item} className="flex gap-2 text-xs text-theme-text-subtle leading-relaxed">
                         <span className="text-blue-400/80 shrink-0 mt-0.5">→</span>
                         {item}
                       </li>
@@ -447,13 +468,13 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                 </div>
               )}
 
-              <p className="text-[11px] text-gray-600 pt-1 border-t border-white/5">
+              <p className="text-[11px] text-theme-text-subtle pt-1 border-t border-theme-border-subtle">
                 {project.company} · {project.period} · {project.sector}
               </p>
             </div>
           </div>
 
-          <motion.div className="px-4 py-3 border-t border-white/10 shrink-0 space-y-2">
+          <motion.div className="px-4 py-3 border-t border-theme-border shrink-0 space-y-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <motion.button
@@ -462,7 +483,7 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                   disabled={isLikeLoading}
                   onClick={handleToggleLike}
                   className={`transition-colors ${
-                    isLiked ? 'text-rose-500' : 'text-gray-300 hover:text-rose-400'
+                    isLiked ? 'text-rose-500' : 'text-theme-muted hover:text-rose-400'
                   }`}
                   aria-label={isLiked ? 'Quitar me gusta' : 'Me gusta'}
                   aria-pressed={isLiked}
@@ -472,21 +493,21 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                 <motion.button
                   type="button"
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => (isCommentsOpen ? setIsCommentsOpen(false) : openComments())}
+                  onClick={toggleComments}
                   className={`transition-colors ${
-                    isCommentsOpen ? 'text-white' : 'text-gray-300 hover:text-white'
+                    isCommentsOpen ? 'text-theme-text' : 'text-theme-muted hover:text-theme-text'
                   }`}
-                  aria-label="Comentarios"
+                  aria-label={isCommentsOpen ? 'Ocultar comentarios' : 'Ver comentarios'}
                   aria-expanded={isCommentsOpen}
                 >
-                  <MessageCircle className={`w-6 h-6 ${isCommentsOpen ? 'fill-white/20' : ''}`} />
+                  <MessageCircle className={`w-6 h-6 ${isCommentsOpen ? 'fill-theme-text/20' : ''}`} />
                 </motion.button>
                 <motion.a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileTap={{ scale: 0.9 }}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-theme-muted hover:text-theme-text transition-colors"
                   aria-label="Compartir"
                 >
                   <Send className="w-6 h-6 -rotate-12" />
@@ -495,23 +516,34 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
               <motion.button
                 type="button"
                 whileTap={{ scale: 0.9 }}
-                className="text-gray-300 hover:text-white transition-colors"
+                className="text-theme-muted hover:text-theme-text transition-colors"
                 aria-label="Guardar"
               >
                 <Bookmark className="w-6 h-6" />
               </motion.button>
             </div>
 
-            <p className="text-sm font-semibold">
-              {likes.toLocaleString('es-CO')} Me gusta
+            <div className="text-sm font-semibold">
+              <span>{likes.toLocaleString('es-CO')} Me gusta</span>
               {comments.length > 0 ? (
-                <span className="text-gray-500 font-normal">
+                <button
+                  type="button"
+                  onClick={toggleComments}
+                  className="text-theme-text-subtle font-normal hover:text-theme-muted transition-colors"
+                  aria-expanded={isCommentsOpen}
+                  aria-label={
+                    isCommentsOpen
+                      ? 'Ocultar comentarios'
+                      : `Ver ${comments.length} comentarios`
+                  }
+                >
                   {' '}
-                  · {comments.length} {comments.length === 1 ? 'comentario' : 'comentarios'}
-                </span>
+                  · {comments.length}{' '}
+                  {comments.length === 1 ? 'comentario' : 'comentarios'}
+                </button>
               ) : null}
-            </p>
-            <p className="text-[10px] text-gray-500 uppercase tracking-wider">
+            </div>
+            <p className="text-[10px] text-theme-text-subtle uppercase tracking-wider">
               {project.views.toLocaleString('es-CO')} reproducciones · {project.postedAgo}
             </p>
 
@@ -523,7 +555,21 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                   exit={{ opacity: 0, height: 0 }}
                   className="overflow-hidden"
                 >
-                  <div className="pt-3 border-t border-white/10 space-y-3">
+                  <div className="pt-3 border-t border-theme-border space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-[10px] font-bold text-theme-text-subtle uppercase tracking-widest">
+                        Comentarios
+                        {comments.length > 0 ? ` (${comments.length})` : ''}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={closeComments}
+                        className="text-xs font-semibold text-theme-muted hover:text-theme-text transition-colors shrink-0"
+                        aria-label="Ocultar comentarios"
+                      >
+                        Ocultar
+                      </button>
+                    </div>
                     <div className="max-h-44 overflow-y-auto space-y-3 scrollbar-hide pr-1">
                       {comments.length > 0 ? (
                         comments.map((comment) => (
@@ -533,19 +579,19 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className="text-xs leading-snug">
-                                <span className="font-semibold text-white mr-1.5">
+                                <span className="font-semibold text-theme-text mr-1.5">
                                   {comment.author}
                                 </span>
-                                <span className="text-gray-300">{comment.text}</span>
+                                <span className="text-theme-muted">{comment.text}</span>
                               </p>
-                              <p className="text-[10px] text-gray-600 mt-1">
+                              <p className="text-[10px] text-theme-text-subtle mt-1">
                                 {formatCommentDate(comment.createdAt)}
                               </p>
                             </div>
                           </div>
                         ))
                       ) : (
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-theme-text-subtle">
                           Sé el primero en comentar este proyecto.
                         </p>
                       )}
@@ -558,7 +604,7 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                         onChange={(event) => setCommentAuthor(event.target.value)}
                         placeholder="Tu nombre"
                         maxLength={60}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500/50"
+                        className="w-full bg-theme-input-bg border border-theme-border rounded-xl px-3 py-2 text-xs text-theme-text focus:outline-none focus:border-blue-500/50"
                       />
                       <div className="flex items-center gap-2">
                         <input
@@ -568,18 +614,18 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
                           onChange={(event) => setCommentText(event.target.value)}
                           placeholder="Escribe un comentario..."
                           maxLength={500}
-                          className="flex-1 bg-transparent border-none text-sm placeholder:text-gray-600 focus:outline-none"
+                          className="flex-1 bg-transparent border-none text-sm text-theme-text placeholder:text-theme-text-subtle focus:outline-none"
                         />
                         <button
                           type="submit"
                           disabled={isCommentLoading || !commentText.trim() || !commentAuthor.trim()}
-                          className="text-xs font-semibold text-blue-400 disabled:text-gray-600 hover:text-blue-300 transition-colors shrink-0"
+                          className="text-xs font-semibold text-blue-400 disabled:text-theme-text-subtle hover:text-blue-300 transition-colors shrink-0"
                         >
                           {isCommentLoading ? '...' : 'Publicar'}
                         </button>
                       </div>
                       {commentFeedback ? (
-                        <p className="text-[11px] text-gray-500">{commentFeedback}</p>
+                        <p className="text-[11px] text-theme-text-subtle">{commentFeedback}</p>
                       ) : null}
                     </form>
                   </div>
@@ -588,67 +634,103 @@ function InstagramPost({ project, engagement, onEngagementChange }) {
             </AnimatePresence>
           </motion.div>
 
-          <div className="px-4 py-3 border-t border-white/10 shrink-0 bg-white/[0.02]">
-            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">
-              {project.clientsSectionTitle ?? 'Clientes del proyecto'}
-            </p>
-            {project.clients.length > 0 ? (
-              <div className="space-y-3 max-h-36 overflow-y-auto scrollbar-hide">
-                {project.clients.map((client) => (
-                  <motion.div
-                    key={client.handle}
-                    initial={{ opacity: 0, x: -6 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="flex items-start gap-2.5"
-                  >
-                    <ClientAvatar client={client} />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs leading-snug">
-                        <span className="font-semibold text-white mr-1">{client.handle}</span>
-                        <span className="text-gray-400">{client.comment}</span>
-                      </p>
-                      <p className="text-[10px] text-gray-600 mt-0.5">{client.name}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-xs text-gray-400 leading-relaxed">
-                {project.clientsEmptyMessage}
-              </p>
-            )}
-
-            <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/5">
-              <img
-                src={profileImg}
-                alt=""
-                className="w-7 h-7 rounded-full object-cover border border-white/10 shrink-0"
-              />
-              <div className="flex-1 flex items-center gap-2 min-w-0">
-                {project.clients.length > 0 && (
-                  <motion.div className="flex -space-x-1.5 shrink-0">
-                    {project.clients.map((client) => (
-                      <ClientAvatar key={client.handle} client={client} size="sm" />
-                    ))}
-                  </motion.div>
-                )}
-                <span className="text-xs text-gray-600 truncate">
-                  {project.clients.length > 0
-                    ? `${project.clients.length} ${
-                        project.clientsSectionTitle === 'Institución académica'
-                          ? project.clients.length === 1
-                            ? 'institución'
-                            : 'instituciones'
-                          : project.clients.length === 1
-                            ? 'cliente'
-                            : 'clientes'
-                      } · `
-                    : ''}
-                  {project.client}
-                </span>
-              </div>
+          <div className="px-4 py-3 border-t border-theme-border shrink-0 bg-theme-panel-bg">
+            <div className="flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={toggleClients}
+                className="text-[10px] font-bold text-theme-text-subtle uppercase tracking-widest hover:text-theme-muted transition-colors text-left"
+                aria-expanded={isClientsOpen}
+              >
+                {project.clientsSectionTitle ?? 'Clientes del proyecto'}
+                {project.clients.length > 0 ? ` (${project.clients.length})` : ''}
+              </button>
+              <button
+                type="button"
+                onClick={toggleClients}
+                className="text-xs font-semibold text-theme-muted hover:text-theme-text transition-colors shrink-0"
+                aria-label={
+                  isClientsOpen
+                    ? `Ocultar ${project.clientsSectionTitle ?? 'clientes del proyecto'}`
+                    : `Ver ${project.clientsSectionTitle ?? 'clientes del proyecto'}`
+                }
+              >
+                {isClientsOpen ? 'Ocultar' : 'Ver'}
+              </button>
             </div>
+
+            <AnimatePresence initial={false}>
+              {isClientsOpen ? (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-3 space-y-3">
+                    {project.clients.length > 0 ? (
+                      <div className="space-y-3 max-h-36 overflow-y-auto scrollbar-hide">
+                        {project.clients.map((client) => (
+                          <motion.div
+                            key={client.handle}
+                            initial={{ opacity: 0, x: -6 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="flex items-start gap-2.5"
+                          >
+                            <ClientAvatar client={client} />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-xs leading-snug">
+                                <span className="font-semibold text-theme-text mr-1">
+                                  {client.handle}
+                                </span>
+                                <span className="text-theme-muted">{client.comment}</span>
+                              </p>
+                              <p className="text-[10px] text-theme-text-subtle mt-0.5">{client.name}</p>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-xs text-theme-muted leading-relaxed">
+                        {project.clientsEmptyMessage}
+                      </p>
+                    )}
+
+                    <div className="flex items-center gap-2 pt-3 border-t border-theme-border-subtle">
+                      <img
+                        src={profileImg}
+                        alt=""
+                        className="w-7 h-7 rounded-full object-cover border border-theme-border shrink-0"
+                      />
+                      <div className="flex-1 flex items-center gap-2 min-w-0">
+                        {project.clients.length > 0 && (
+                          <motion.div className="flex -space-x-1.5 shrink-0">
+                            {project.clients.map((client) => (
+                              <ClientAvatar key={client.handle} client={client} size="sm" />
+                            ))}
+                          </motion.div>
+                        )}
+                        <span className="text-xs text-theme-text-subtle truncate">
+                          {project.clients.length > 0
+                            ? `${project.clients.length} ${
+                                project.clientsSectionTitle === 'Institución académica'
+                                  ? project.clients.length === 1
+                                    ? 'institución'
+                                    : 'instituciones'
+                                  : project.clients.length === 1
+                                    ? 'cliente'
+                                    : 'clientes'
+                              } · `
+                            : ''}
+                          {project.client}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
           </div>
         </div>
       </motion.div>
